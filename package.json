@@ -1,0 +1,59 @@
+{
+  "name": "sentinel-driver",
+  "version": "1.0.0",
+  "description": "Driver interface for SentinelPro",
+  "private": true,
+  "config": {
+    "serve": {
+      "domain": "localhost",
+      "port": 8001
+    },
+    "dir": {
+      "css": "css/styles/",
+      "js": "js/",
+      "img": "img/"
+    }
+  },
+  "scripts": {
+    "preinstall": "git submodule update --init --recursive",
+    "postinstall": "npm run build",
+    "start": "php -S ${npm_package_config_serve_domain}:${npm_package_config_serve_port}",
+    "test": "npm run lint:js && npm run lint:css",
+    "lint:css": "stylelint ${npm_package_config_dir_css}",
+    "lint:js": "eslint ${npm_package_config_dir_js}",
+    "build": "npm run build:icons && npm run build:css && npm run build:js",
+    "build:css": "postcss ${npm_package_config_dir_css}index.css -o ${npm_package_config_dir_css}index.min.css",
+    "build:icons": "svg-sprite-generate -c icons.csv -o {npm_package_config_dir_img}icons.svg",
+    "build:js": "webpack"
+  },
+  "keywords": [
+    "vrmt",
+    "scfs",
+    "driver"
+  ],
+  "author": "Chris Zuber <shgysk8zer0@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-plugin-async-await": "0.0.0",
+    "eslint-plugin-babel": "^5.2.1",
+    "stylelint": "^9.6.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-config-standard": "^18.2.0",
+    "svgo": "^1.1.1"
+  },
+  "dependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "cssnano": "^4.1.7",
+    "postcss": "^7.0.5",
+    "postcss-cli": "^6.0.1",
+    "postcss-discard-comments": "^4.0.1",
+    "postcss-import": "^12.0.1",
+    "postcss-load-config": "^2.0.0",
+    "postcss-preset-env": "^6.2.0",
+    "postcss-url": "^8.0.0",
+    "svg-sprite-generator": "0.0.7",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2"
+  }
+}
