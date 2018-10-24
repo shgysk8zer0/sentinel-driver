@@ -38,7 +38,7 @@
     "scfs",
     "driver"
   ],
-  "author": "Chris Zuber <shgysk8zer0@gmail.com>",
+  "author": "Chris Zuber <sk8zer0@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^5.7.0",
