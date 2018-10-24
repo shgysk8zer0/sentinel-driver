@@ -26,7 +26,7 @@
     "build:css": "postcss ${npm_package_config_dir_css}index.css -o ${npm_package_config_dir_css}index.min.css",
     "build:icons": "svg-sprite-generate -c icons.csv -o {npm_package_config_dir_img}icons.svg",
     "build:js": "webpack",
-    "build:site": "npm install && JEKYLL_ENV=production bundle exec jekyll build",
+    "build:site": "JEKYLL_ENV=production bundle exec jekyll build",
     "build:site:dev": "bundle exec jekyll build --drafts --unpublished --future --profile --trace --strict_front_matter",
     "lint:css": "stylelint ${npm_package_config_dir_css}",
     "lint:js": "eslint ${npm_package_config_dir_js}",
