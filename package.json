@@ -19,7 +19,7 @@
   },
   "scripts": {
     "preinstall": "git submodule update --init --recursive",
-    "postinstall": "npm run build && npm run build:site",
+    "postinstall": "npm run build",
     "start": "npm run serve:dev",
     "test": "npm run lint:js && npm run lint:css",
     "build": "npm run build:icons && npm run build:css && npm run build:js",
