@@ -11,6 +11,21 @@ module.exports = {
 			minimize: true
 		},
 		mode: "production",
+		module: {
+		  rules: [
+		    {
+		      test: /\.js$/,
+		      exclude: /(node_modules|bower_components)/,
+		      use: {
+		        loader: 'babel-loader',
+		        options: {
+		          presets: ['@babel/preset-env'],
+							plugins: ['@babel/transform-runtime']
+		        }
+		      }
+		    }
+		  ]
+		},
     plugins: [
         // Avoid publishing files when compilation fails
         new webpack.NoEmitOnErrorsPlugin(),
