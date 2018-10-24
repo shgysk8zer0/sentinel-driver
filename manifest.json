@@ -1,41 +1,20 @@
+---
+layout: null
+---
 {
-	"name": "",
-	"short_name": "",
-	"icons": [
-		{
-			"src": "/images/sun-icons/any.svg",
-			"sizes": "any",
-			"type": "image/svg+xml"
-		},
-		{
-			"src": "/images/sun-icons/16.png",
-			"sizes": "16x16",
-			"type": "image/png"
-		},
-		{
-			"src": "/images/sun-icons/32.png",
-			"sizes": "32x32",
-			"type": "image/png"
-		},
-		{
-			"src": "/images/sun-icons/72.png",
-			"sizes": "72x72",
-			"type": "image/png"
-		},
-		{
-			"src": "/images/sun-icons/144.png",
-			"sizes": "144x144",
-			"type": "image/png"
-		},
-		{
-			"src": "/images/sun-icons/256.png",
-			"sizes": "256x256",
-			"type": "image/png"
-		}
-	],
-	"theme_color": "#EA5708",
-	"background_color": "#EA5708",
-	"start_url": "/",
-	"display": "standalone",
-	"orientation": "portrait"
+	"version": "{{ site.version }}",
+	"name": "{{ site.title }}",
+	"short_name": "{{ site.short-name | default: site.title}}",
+	"description": "{{ site.description }}",
+	"start_url": "{{ page.url | absolute_url | replace: 'manifest.json', '' }}",
+	"lang": "{{ site.lang }}",
+	"display": "{{ site.display | default: 'standalone' }}",
+	"theme_color": "{{ site.theme-color }}",
+	"background_color": "{{ site.background-color | default: '#FEFEFE' }}",
+	"icons": {{ site.appicons | jsonify }},
+	"screenshots": {{ site.screenshots | jsonify }},
+	"developer": {
+		"name": "Chris Zuber",
+		"url": "http://chriszuber.com"
+	}
 }

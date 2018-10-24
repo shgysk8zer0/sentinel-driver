@@ -1,0 +1,167 @@
+author: Chris Zuber
+title: Sentinel Driver
+# url:
+markdown: kramdown
+version: 1.0.0
+timezone: America/Los_Angeles
+lang: en
+dir: ltr
+charset: utf-8
+viewport: width=device-width
+robots: 'follow,index'
+referrer: origin-when-cross-origin
+manifest: /manifest.json
+tiles-config: /browserconfig.xml
+service_worker: /service-worker.js
+og-type: website
+description: "Driver interface for SentinelPro"
+mobile-web-app-capable: true
+publisher: ''
+canonical: ''
+body-class: 'background-primary color-default grid border-box cursor-default font-main'
+feature-detect:
+- details
+- dialog
+keywords:
+- SentinelPro
+- VRMT
+# repository:
+#   username:
+#   title:
+#   url:
+# twitter:
+# facebook:
+# feed:
+#   url: /feed.rss
+#   type: application/rss+xml
+icons: '/img/icons.svg'
+theme-color: '#4688f4'
+background-color: '#5b46f4'
+# discus-identifier:
+# google-analytics:
+# ad-sense:
+# webmaster-verifications:
+#  google:
+#  bing:
+scripts:
+  development:
+  - src: 'https://cdn.polyfill.io/v2/polyfill.min.js?unknown=polyfill&features=es6,MutationObserver,IntersectionObserver,IntersectionObserverEntry,Object.values,Object.entries,NodeList.prototype.@@iterator,Array.prototype.@@iterator&flags=gated'
+    type: application/javascript
+    crossorigin: anonymous
+    async: true
+  - src: /js/index.js
+    type: module
+    async: true
+  - src: /js/index.min.js
+    type: application/javascript
+    async: true
+    nomodule: true
+  production:
+  - src: 'https://cdn.polyfill.io/v2/polyfill.min.js?unknown=polyfill&features=es6,MutationObserver,IntersectionObserver,IntersectionObserverEntry,Object.values,Object.entries,NodeList.prototype.@@iterator,Array.prototype.@@iterator&flags=gated'
+    type: application/javascript
+    crossorigin: anonymous
+    async: true
+  - src: /js/index.min.js
+    type: application/javascript
+    async: true
+stylesheets:
+  development:
+  - href: /css/styles/index.css
+    media: all
+  production:
+  - href: /css/styles/index.min.css
+    media: all
+preload:
+- href: /img/icons.svg
+  as: image
+  type: image/svg+xml
+  name: icons
+appicons:
+- src: /img/favicon.svg
+  sizes: any
+  type: image/svg+xml
+- src: /img/icon-512.png
+  sizes: 512x512
+  type: image/png
+- src: /img/icon-192.png
+  sizes: 192x192
+  type: image/png
+# screenshots:
+# - src:
+#   sizes: 640x300
+#   type: image/png
+# defaults:
+# - scope:
+#     path: _posts
+#   values:
+#     layout: post
+#     author: Chris Zuber
+#     permalink: /:categories/:year/:month/:day/:title/
+#     comments: true
+#     ads: false
+#     index: true
+# - scope:
+#     path: _events
+#   values:
+#     layout: page
+#     comments: true
+#     ads: false
+#     index: true
+# - scope:
+#     path: _drafts
+#   values:
+#     layout: post
+#     author: Chris Zuber
+#     permalink: /posts/:categories/:year/:month/:day/:title/
+#     comments: false
+#     ads: false
+# collections:
+#   events:
+#     output: true
+#     permalink: /:collection/:name/
+plugins:
+- jekyll-watch
+include:
+- _headers
+- _redirects
+exclude:
+- "*.rb"
+- "*.gemspec"
+- "*.php"
+- "*.sh"
+- "*.csv"
+- "*.sfd"
+- "*.ai"
+- "*.psd"
+- "*.sketch"
+- "*.yml"
+- "*.lock"
+- "*.log"
+- "/css/*.md"
+- "/js/*.md"
+- "/img/*.md"
+- "/fonts/*.md"
+- "/js/*.json"
+- "/package.json"
+- "/package-lock.json"
+- "/js/svg4everybody/dist/"
+- "/js/svg4everybody/test/"
+- "/css/animate.css/source/"
+- docs/
+- "/css/*.json"
+- "/img/*.json"
+- "/js/*.html"
+- Gemfile
+- node_modules/
+- palette.xml
+- postcss.config.js
+- postcss.config.json
+- README.md
+- LICENSE
+- "*.config.js"
+- "/img/adwaita-icons/docs"
+- "/img/adwaita-icons/LICENSE"
+- "css/core-css/docs"
+- "css/normalize/*.html"
+- "js/std-js/docs"
+- "js/std-js/test"

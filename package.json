@@ -6,7 +6,10 @@
   "config": {
     "serve": {
       "domain": "localhost",
-      "port": 8001
+      "port": {
+        "prod": 4000,
+        "dev": 8001
+      }
     },
     "dir": {
       "css": "css/styles/",
@@ -15,16 +18,20 @@
     }
   },
   "scripts": {
-    "preinstall": "git submodule update --init --recursive",
+    "preinstall": "echo $PATH && git submodule update --init --recursive && bundle install",
     "postinstall": "npm run build",
-    "start": "php -S ${npm_package_config_serve_domain}:${npm_package_config_serve_port}",
+    "start": "npm run serve:dev",
     "test": "npm run lint:js && npm run lint:css",
-    "lint:css": "stylelint ${npm_package_config_dir_css}",
-    "lint:js": "eslint ${npm_package_config_dir_js}",
     "build": "npm run build:icons && npm run build:css && npm run build:js",
     "build:css": "postcss ${npm_package_config_dir_css}index.css -o ${npm_package_config_dir_css}index.min.css",
     "build:icons": "svg-sprite-generate -c icons.csv -o {npm_package_config_dir_img}icons.svg",
-    "build:js": "webpack"
+    "build:js": "webpack",
+    "build:site": "npm install && JEKYLL_ENV=production bundle exec jekyll build",
+    "build:site:dev": "bundle exec jekyll build --drafts --unpublished --future --profile --trace --strict_front_matter",
+    "lint:css": "stylelint ${npm_package_config_dir_css}",
+    "lint:js": "eslint ${npm_package_config_dir_js}",
+    "serve:production": "npm run build && JEKYLL_ENV=production bundle exec jekyll serve --port ${npm_package_config_serve_port_prod}",
+    "serve:dev": "bundle exec jekyll serve --drafts --unpublished --future --profile --trace --strict_front_matter --port ${npm_package_config_serve_port_dev}"
   },
   "keywords": [
     "vrmt",

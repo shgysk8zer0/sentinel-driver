@@ -1,0 +1,5 @@
+# Redirect default Netlify subdomain to primary domain
+# https://youthful-dijkstra-321f5b.netlify.com/* https://events.kernvalley.us/:splat 301!
+
+# These extra rules are required because HTTPS is not forced
+# http://youthful-dijkstra-321f5b.netlify.com/* https://events.kernvalley.us/:splat 301!
