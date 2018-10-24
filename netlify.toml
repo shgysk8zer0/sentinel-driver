@@ -30,6 +30,6 @@
       reflected-xss block;
       manifest-src 'self';
       form-action 'self';'''
-[[redirects]]
+# [[redirects]]
   # from = ""
   # to = ""
