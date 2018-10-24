@@ -9,8 +9,8 @@
   for="/*"
   [headers.values]
     Link = '''
-      </css/styles/index.min.css>; rel=preload; as=style
-      </css/js/index.min.js>; rel=preload; as=script
+      </css/styles/index.min.css>; rel=preload; as=style, \
+      </css/js/index.min.js>; rel=preload; as=script, \
       </css/img/icons.svg>; rel=preload; as=image
     '''
     X-Frame-Options = "DENY"
