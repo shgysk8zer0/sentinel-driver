@@ -18,11 +18,11 @@
     }
   },
   "scripts": {
-    "preinstall": "git submodule update --init --recursive && bundle install",
-    "postinstall": "npm run build",
+    "preinstall": "echo 'running preinstall' && git submodule update --init --recursive && bundle install",
+    "postinstall": "echo 'running postinstall' && npm run build",
     "start": "npm run serve:dev",
     "test": "npm run lint:js && npm run lint:css",
-    "build": "npm run build:icons && npm run build:css && npm run build:js",
+    "build": "npm run build:icons && npm run build:css && npm run build:js && npm run build:site",
     "build:css": "postcss ${npm_package_config_dir_css}index.css -o ${npm_package_config_dir_css}index.min.css",
     "build:icons": "svg-sprite-generate -c icons.csv -o {npm_package_config_dir_img}icons.svg",
     "build:js": "webpack",
