@@ -1,9 +1,11 @@
 module.exports = {
-	"map": true,
-	"plugins": {
-		"cssnano": null,
-		"postcss-preset-env": null,
-		"postcss-import": null,
-		"postcss-url": null
-	}
+	map: {
+		inline: false,
+	},
+	plugins: [
+		require('postcss-preset-env'),
+		require('postcss-import'),
+		require('postcss-discard-comments'),
+		require('cssnano'),
+	]
 }
