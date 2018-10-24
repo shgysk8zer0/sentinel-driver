@@ -18,7 +18,7 @@
     }
   },
   "scripts": {
-    "preinstall": "echo $PATH && git submodule update --init --recursive && bundle install",
+    "preinstall": "git submodule update --init --recursive && bundle install",
     "postinstall": "npm run build",
     "start": "npm run serve:dev",
     "test": "npm run lint:js && npm run lint:css",
