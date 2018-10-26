@@ -45,7 +45,7 @@ ready().then(async () => {
 
 				if (ask) {
 					while (miles !== null && Number.isNaN(miles)) {
-						miles = await prompt('Enter odomoter reading');
+						miles = await prompt('Enter odometer reading');
 						if (miles !== null) {
 							miles = parseInt(miles);
 						}
