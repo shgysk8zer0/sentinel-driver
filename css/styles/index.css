@@ -8,3 +8,23 @@
 @import url("../animate.css/animate.css");
 @import url("../core-css/animations.css");
 @import url("../core-css/fonts.css");
+
+dialog {
+	border: none;
+}
+
+.vehicle-opt {
+	transition: transform 450ms ease-in-out, box-box-shadow 450ms ease-in-out;
+	position: relative;
+	margin: 0.5em;
+	z-index: 1;
+}
+
+.vehicle-opt.selected {
+	box-shadow: 0 4px 20px rgba(0,0,220,.6);
+}
+
+.vehicle-opt:hover {
+	transform: scale(1.05);
+	z-index: 2;
+}
