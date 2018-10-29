@@ -7,7 +7,6 @@
     "serve": {
       "domain": "localhost",
       "port": {
-        "prod": 4000,
         "dev": 8001
       }
     },
@@ -20,25 +19,21 @@
   "scripts": {
     "preinstall": "git submodule update --init --recursive",
     "postinstall": "npm run build",
-    "start": "npm run serve:dev",
+    "start": "python -m SimpleHTTPServer ${npm_package_config_serve_port_dev}",
     "test": "npm run lint:js && npm run lint:css",
     "build": "npm run build:icons && npm run build:css && npm run build:js",
     "build:css": "postcss ${npm_package_config_dir_css}index.css -o ${npm_package_config_dir_css}index.min.css",
-    "build:icons": "svg-sprite-generate -c icons.csv -o {npm_package_config_dir_img}icons.svg",
+    "build:icons": "svg-sprite-generate -c icons.csv -o ${npm_package_config_dir_img}icons.svg",
     "build:js": "webpack",
-    "build:site": "JEKYLL_ENV=production bundle exec jekyll build",
-    "build:site:dev": "bundle exec jekyll build --drafts --unpublished --future --profile --trace --strict_front_matter",
     "lint:css": "stylelint ${npm_package_config_dir_css}",
-    "lint:js": "eslint ${npm_package_config_dir_js}",
-    "serve:production": "npm run build && JEKYLL_ENV=production bundle exec jekyll serve --port ${npm_package_config_serve_port_prod}",
-    "serve:dev": "bundle exec jekyll serve --drafts --unpublished --future --profile --trace --strict_front_matter --port ${npm_package_config_serve_port_dev}"
+    "lint:js": "eslint ${npm_package_config_dir_js}"
   },
   "keywords": [
     "vrmt",
     "scfs",
     "driver"
   ],
-  "author": "Chris Zuber <sk8zer0@gmail.com>",
+  "author": "Chris Zuber <shgysk8zer0@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^5.7.0",

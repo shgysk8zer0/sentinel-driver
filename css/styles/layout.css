@@ -1,0 +1,15 @@
+@import url("./header.css");
+@import url("./nav.css");
+@import url("./sidebar.css");
+@import url("./main.css");
+@import url("./footer.css");
+
+body.grid {
+	grid-template-areas: 'header header header'
+	'nav nav nav'
+	'sidebar main .'
+	'footer footer footer';
+	grid-template-rows: var(--header-height, auto) var(--nav-height) minmax(calc(100vh - var(--nav-height)), auto);
+	grid-template-columns: 18vw 1fr 1rem;
+	grid-gap: 0.7rem;
+}
