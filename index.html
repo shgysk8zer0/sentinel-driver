@@ -1,4 +1,48 @@
----
-title: Home
-layout: default
----
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Sentinel Driver</title>
+		<script type="module" src="/js/index.js" async=""></script>
+		<link rel="stylesheet" href="/css/styles/index.css" media="all" />
+		<link rel="import" href="/components/login-form/login-form.html" name="LoginForm" async="" />
+		<link rel="import" href="/components/vehicle-element/vehicle-element.html" name="VehicleElement" async="" />
+		<link rel="import" href="/components/vehicle-list/vehicle-list.html" name="VehicleList" async="" />
+		<link rel="import" href="/components/driver-list/driver-list.html" name="DriverList" async="" />
+		<link rel="import" href="/components/driver-element/driver-element.html" name="DriverElement" async="" />
+		<link rel="import" href="/img/icons.svg" name="icons" async="" />
+	</head>
+	<body class="color-default background-primary font-main border-box grid">
+		<header></header>
+		<nav class="flex row no-wrap sticky top shadow z-4">
+			<button is="login-button" title="Login">
+				<svg class="current-color icon">
+					<use xlink:href="#sign-in" />
+				</svg>
+			</button>
+			<button is="logout-button" title="Logout">
+				<svg class="current-color icon">
+					<use xlink:href="#sign-out" />
+				</svg>
+			</button>
+		</nav>
+		<aside>
+			<driver-list></driver-list>
+		</aside>
+		<main>
+			<vehicle-list></vehicle-list>
+		</main>
+		<footer>
+			<span>&copy;</span>
+			<time is="current-year"></time>
+		</footer>
+		<login-form action="vehicles.json">
+			<svg class="current-color icon" slot="submit-btn">
+				<use xlink:href="#sign-in" />
+			</svg>
+			<svg class="current-color icon" slot="reset-btn">
+				<use xlink:href="#x" />
+			</svg>
+		</login-form>
+	</body>

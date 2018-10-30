@@ -1,60 +1,42 @@
 import './std-js/deprefixer.js';
 import './std-js/shims.js';
-import {ready, $} from './std-js/functions.js';
-import {confirm, prompt} from './std-js/asyncDialog.js';
+import {ready, $, notify} from './std-js/functions.js';
+import '../components/login-form/login-form.js';
+import '../components/vehicle-list/vehicle-list.js';
+import '../components/vehicle-element/vehicle-element.js';
+import '../components/driver-list/driver-list.js';
+import '../components/driver-element/driver-element.js';
+import '../components/login-button.js';
+import '../components/logout-button.js';
+import '../components/current-year.js';
+import {loadData} from './functions.js';
 
 ready().then(async () => {
 	$(document.documentElement).replaceClass('no-js', 'js');
+	$('link[name="icons"]').import('svg').then(icons => document.body.append(icons));
 
-	$('[data-show-modal]').click(event => {
-		$(event.target.closest('[data-show-modal]').dataset.showModal).showModal();
-	}, {
-		passive: true,
-	});
-
-	$('[data-close]').click(event => {
-		$(event.target.closest('[data-close]').dataset.close).close();
-	}, {
-		passive: true,
-	});
-
-	$('form[name="login"]').submit(async event => {
-		event.preventDefault();
-		$('[data-show-modal="#login-dialog"]').hide();
-		const form = new FormData(event.target);
-		const url = new URL(event.target.action);
-
-		console.log({data: Object.fromEntries(form.entries()), url});
-		const tmp = document.getElementById('vehicle-template').content;
-		const main = document.querySelector('main');
-
-		for (let n = 3; n !== 0; n--) {
-			const vehicle = main.appendChild(tmp.cloneNode(true).firstElementChild);
-			vehicle.addEventListener('click', async () => {
-				let miles = NaN;
-				let ask = false;
-
-				if (! vehicle.classList.contains('selected') && await confirm('Check out this vehicle')) {
-					await $('.vehicle-opt.selected', vehicle.parentElement).removeClass('selected');
-					vehicle.classList.add('selected');
-					ask = true;
-				} else if(vehicle.classList.contains('selected') && await confirm('Check in this vehicle')) {
-					vehicle.classList.remove('selected');
-					ask = true;
-				}
-
-				if (ask) {
-					while (miles !== null && Number.isNaN(miles)) {
-						miles = await prompt('Enter odometer reading');
-						if (miles !== null) {
-							miles = parseInt(miles);
-						}
-					}
-				}
-			}, {
-				passive: true,
+	document.addEventListener('login', async event => {
+		if (event.detail !== null && event.detail.hasOwnProperty('resp') && event.detail.hasOwnProperty('ownerInfo')) {
+			const {token, userid} = event.detail.resp;
+			const {ownerid, name} = event.detail.ownerInfo;
+			sessionStorage.setItem('token', token);
+			sessionStorage.setItem('userId', userid);
+			sessionStorage.setItem('ownerId', ownerid);
+			sessionStorage.setItem('companyName', name);
+			notify('Login successful', {
+				body: `Welcome back, ${name}`,
+				icon: new URL('/img/icon-192.png', document.baseURI),
 			});
 		}
-		event.target.closest('dialog').close();
+		loadData();
 	});
+
+	document.addEventListener('logout', () => {
+		sessionStorage.clear();
+		$('vehicle-element, driver-element').remove();
+	});
+
+	if (sessionStorage.hasOwnProperty('token')) {
+		document.dispatchEvent(new CustomEvent('login'));
+	}
 });

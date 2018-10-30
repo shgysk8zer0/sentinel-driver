@@ -1,0 +1,6 @@
+body > nav {
+	grid-area: nav;
+	height: var(--nav-height, 2rem);
+	background: inherit;
+	padding: 0.1rem;
+}

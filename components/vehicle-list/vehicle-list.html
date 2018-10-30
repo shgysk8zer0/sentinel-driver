@@ -1,0 +1,11 @@
+<template id="vehicle-list-template">
+	<style>
+		.grid-list {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, 350px);
+			grid-template-rows: repeat(auto-fill, 250px);
+			grid-gap: 0.3rem;
+		}
+	</style>
+	<slot class="grid-list" name="vehicles"></slot>
+</template>

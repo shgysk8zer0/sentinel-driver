@@ -1,0 +1,9 @@
+body > aside {
+	grid-area: sidebar;
+	overflow-y: auto;
+	border-right: 1px solid var(--default-color);
+}
+
+driver-element {
+	cursor: grab;
+}
