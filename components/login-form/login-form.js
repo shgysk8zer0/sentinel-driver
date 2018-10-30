@@ -1,5 +1,6 @@
-import {$, notify} from '/js/std-js/functions.js';
-import {API} from '/js/consts.js';
+import {$, notify} from '../../js/std-js/functions.js';
+import {API} from '../../js/consts.js';
+import {getOwnerInfo} from '../../js/functions.js';
 
 export default class LoginForm extends HTMLElement {
 	constructor() {
@@ -31,9 +32,13 @@ export default class LoginForm extends HTMLElement {
 					if ('error' in json) {
 						throw new Error(`"${json.message}" [${json.error}]`);
 					}
+
+					const {token, userid} = json;
+
 					document.dispatchEvent(new CustomEvent('login', {
 						detail: {
 							resp: json,
+							ownerInfo: await getOwnerInfo({userid, token}),
 						}
 					}));
 					this.reset();

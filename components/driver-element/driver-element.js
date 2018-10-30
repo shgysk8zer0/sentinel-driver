@@ -1,4 +1,4 @@
-import {$} from '/js/std-js/functions.js';
+import {$} from '../../js/std-js/functions.js';
 
 /**
  * [template description]

@@ -1,4 +1,4 @@
-import {$} from '/js/std-js/functions.js';
+import {$} from '../../js/std-js/functions.js';
 
 export default class HTMLVehicleElement extends HTMLElement {
 	constructor() {
@@ -6,12 +6,13 @@ export default class HTMLVehicleElement extends HTMLElement {
 		const template = document.getElementById('vehicle-element-template').content;
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
 		this.setAttribute('dropzone', 'move');
+		this.classList.add('card', 'shadow');
 		this.addEventListener('drop', event => {
 			event.preventDefault();
 			const driverUID = event.dataTransfer.getData('text/plain');
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
 			this.driver = driverUID;
-			console.log({event, driverUID});
+			console.log({driver: driverUID, vehicle: this.uid});
 		});
 		this.addEventListener('dragover', event => {
 			event.preventDefault();
@@ -25,7 +26,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get uid() {
-		return this.getAttribut('uid');
+		return this.getAttribute('uid');
 	}
 
 	set uid(id) {
