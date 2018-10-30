@@ -1,7 +1,7 @@
 # https://www.netlify.com/docs/netlify-toml-reference/
 [build]
   base = "./"
-  publish = "_site/"
+  publish = "./"
   command = "npm run build && npm run build:icons"
   [build.environment]
     GIT_LFS_ENABLED = "1"
