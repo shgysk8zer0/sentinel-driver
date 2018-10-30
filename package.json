@@ -18,7 +18,6 @@
   },
   "scripts": {
     "preinstall": "git submodule update --init --recursive",
-    "postinstall": "npm run build",
     "start": "python -m SimpleHTTPServer ${npm_package_config_serve_port_dev}",
     "test": "npm run lint:js && npm run lint:css",
     "build": "npm run build:icons && npm run build:css && npm run build:js",
