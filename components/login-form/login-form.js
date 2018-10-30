@@ -1,4 +1,5 @@
-import {$} from '/js/std-js/functions.js';
+import {$, notify} from '/js/std-js/functions.js';
+import {API} from '/js/consts.js';
 
 export default class LoginForm extends HTMLElement {
 	constructor() {
@@ -12,21 +13,38 @@ export default class LoginForm extends HTMLElement {
 
 		this.form.addEventListener('submit', async event => {
 			event.preventDefault();
-			const form = new FormData(this.form);
-			const url = this.action;
-			const data = Object.fromEntries(form.entries());
-			[...form.entries()].forEach(([key, val]) => url.searchParams.set(key, val));
-			const resp = await fetch(url);
-			const json = await resp.json();
-
-			document.dispatchEvent(new CustomEvent('login', {
-				detail: {
-					url,
-					userID: data.userID,
-					data: json,
+			try {
+				const form = new FormData(this.form);
+				const url = new URL(`${API}logins`);
+				const headers = new Headers();
+				const body = JSON.stringify([Object.fromEntries(form.entries())]);
+				headers.set('Content-Type', 'application/json');
+				headers.set('Accept', 'application/json');
+				const resp = await fetch(url, {
+					mode: 'cors',
+					method: 'POST',
+					headers,
+					body,
+				});
+				if (resp.ok) {
+					const json = await resp.json();
+					if ('error' in json) {
+						throw new Error(`"${json.message}" [${json.error}]`);
+					}
+					document.dispatchEvent(new CustomEvent('login', {
+						detail: {
+							resp: json,
+						}
+					}));
+					this.reset();
 				}
-			}));
-			this.reset();
+			} catch(err) {
+				console.error(err);
+				notify('Error logging in', {
+					body: err.message,
+					icon: new URL('/img/octicons/alert.svg', document.baseURI)
+				});
+			}
 		});
 	}
 

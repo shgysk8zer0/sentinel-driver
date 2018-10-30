@@ -1,11 +1,27 @@
 import {$} from '/js/std-js/functions.js';
-import HTMLDriverElement from '/components/driver-element/driver-element.js';
 
 export default class HTMLVehicleElement extends HTMLElement {
 	constructor() {
 		super();
 		const template = document.getElementById('vehicle-element-template').content;
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
+		this.setAttribute('dropzone', 'move');
+		this.addEventListener('drop', event => {
+			event.preventDefault();
+			const driverUID = event.dataTransfer.getData('text/plain');
+			this.shadowRoot.lastElementChild.classList.remove('dragging');
+			this.driver = driverUID;
+			console.log({event, driverUID});
+		});
+		this.addEventListener('dragover', event => {
+			event.preventDefault();
+			this.shadowRoot.lastElementChild.classList.add('dragging');
+			event.dataTransfer.dropEffect = 'move';
+		});
+		this.addEventListener('dragleave', event => {
+			event.preventDefault();
+			this.shadowRoot.lastElementChild.classList.remove('dragging');
+		});
 	}
 
 	get uid() {
@@ -17,13 +33,11 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get driver() {
-		return this.shadowRoot.querySelector('slot[name="driver"]').assignedNodes()[0];
+		return this.getAttribute('driverUid');
 	}
 
 	set driver(driver) {
-		if (! (driver instanceof HTMLDriverElement)) {
-			throw new Error('Expected driver to be an instance of <driver-element>');
-		}
+		this.setAttribute('driverUid', driver);
 	}
 }
 
