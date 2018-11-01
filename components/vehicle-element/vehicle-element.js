@@ -12,7 +12,6 @@ export default class HTMLVehicleElement extends HTMLElement {
 			const driverUID = event.dataTransfer.getData('text/plain');
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
 			this.driver = driverUID;
-			console.log({driver: this.driver, vehicle: this.uid});
 		});
 		this.addEventListener('dragover', event => {
 			event.preventDefault();
@@ -48,9 +47,13 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	set driver(driver) {
-		const driverEl = document.querySelector('driver-list').find(driver);
+		const drivers = document.querySelector('driver-list');
+		const driverEl = drivers.find(driver);
 		this.setAttribute('driverUid', driver);
 		if (driverEl instanceof HTMLElement) {
+			if (this.driver instanceof HTMLElement) {
+				drivers.append(this.driver);
+			}
 			driverEl.slot = 'driver';
 			this.append(driverEl);
 		}

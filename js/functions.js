@@ -48,7 +48,6 @@ export async function loadData() {
 		ownerid: sessionStorage.getItem('ownerId'),
 		token: sessionStorage.getItem('token'),
 	});
-	console.log(units);
 	try {
 		const drivers = [...units.drivers].map(driver => {
 			const el = new DriverElement();
