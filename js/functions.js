@@ -48,23 +48,8 @@ export async function loadData() {
 		ownerid: sessionStorage.getItem('ownerId'),
 		token: sessionStorage.getItem('token'),
 	});
+	console.log(units);
 	try {
-		const vehicles = [...units.vehicles].map(vehicle => {
-			const el = new VehicleElement();
-			const name = document.createElement('span');
-			name.textContent = vehicle.vehicle;
-			name.slot = 'name';
-			el.append(name);
-			el.uid = vehicle.vehicleid;
-
-			if ('image' in vehicle) {
-				const img = new Image();
-				img.slot = 'image';
-				img.src = new URL(vehicle.image, VEHICLE.imgDir);
-				el.append(img);
-			}
-			return el;
-		});
 		const drivers = [...units.drivers].map(driver => {
 			const el = new DriverElement();
 			el.slot = 'drivers';
@@ -75,8 +60,28 @@ export async function loadData() {
 			el.uid = driver.id;
 			return el;
 		});
-		VehicleList.add(...vehicles);
 		DriverList.append(...drivers);
+		const vehicles = [...units.vehicles].map(vehicle => {
+			const el = new VehicleElement();
+			const name = document.createElement('span');
+			name.textContent = vehicle.vehicle;
+			name.slot = 'name';
+			el.append(name);
+			el.uid = vehicle.vehicleid;
+			if (vehicle.driverid !== null) {
+				el.driver = vehicle.driverid;
+			}
+
+			if ('image' in vehicle) {
+				const img = new Image();
+				img.slot = 'image';
+				img.src = new URL(vehicle.image, VEHICLE.imgDir);
+				el.append(img);
+			}
+			return el;
+		});
+		VehicleList.add(...vehicles);
+
 	} catch(err) {
 		console.error(err);
 		document.dispatchEvent(new CustomEvent('logout'));
