@@ -13,18 +13,20 @@ export default class HTMLVehicleListElement extends HTMLElement {
 		}
 	}
 
+	get vehicles() {
+		return [...this.shadowRoot.querySelector('slot[name="vehicles"]').assignedNodes()];
+	}
+
+	find(id) {
+		return this.vehicles.find(vehicle => vehicle.uid === id);
+	}
+
 	add(...vehicles) {
 		vehicles.forEach(vehicle => {
 			vehicle.slot = 'vehicles';
 		});
 		this.append(...vehicles);
 	}
-
-	findDriver(id) {
-		return this.shadowRoot.querySelectorAll('vehicle-element').find(vehicle => vehicle.uid === id);
-	}
-
-
 }
 
 $('link[name="VehicleList"]').import('template').then(frag => {

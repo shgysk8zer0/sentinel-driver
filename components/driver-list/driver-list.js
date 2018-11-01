@@ -6,6 +6,14 @@ export default class HTMLDriverListElement extends HTMLElement {
 		const template = document.getElementById('driver-list-template').content;
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
 	}
+
+	get drivers() {
+		return [...this.shadowRoot.querySelector('slot[name="drivers"]').assignedNodes()];
+	}
+
+	find(id) {
+		return this.drivers.find(driver => driver.uid === id);
+	}
 }
 
 $('link[name="DriverList"]').import('template').then(frag => {

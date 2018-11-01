@@ -1,87 +1,50 @@
 <template id="login-form-template">
 	<style>
-		@import url("/css/core-css/elements.css");
-		.no-border {
-			border: none;
-		}
+		@import url("/css/core-css/element.css");
+		@import url("/css/core-css/class-rules.css");
+		@import url("/css/core-css/animations.css");
+		@import url("/css/animate.css/animate.css");
 
-		dialog {
-			position: absolute;
-			left: 0;
-			right: 0;
-			width: -moz-fit-content;
-			width: -webkit-fit-content;
-			width: fit-content;
-			height: -moz-fit-content;
-			height: -webkit-fit-content;
-			height: fit-content;
-			margin: auto;
-			border: solid;
-			padding: 1em;
-			background: white;
-			color: black;
-			display: block;
-			z-index: 100;
-		}
-
-		dialog:not([open]) {
-			display: none;
-		}
-
-		dialog + .backdrop {
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 99;
-		}
-
-		dialog + .backdrop, dialog::backdrop {
-			background: var(--backdrop-background, rgba(0,0,0,0.7));
-		}
-
-		/*._dialog_overlay {
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-		}*/
-
-		dialog.modal {
-			position: fixed;
-			top: 50%;
-			transform: translate(0, -50%);
+		input {
+			height: 1.3rem;
 		}
 
 		button {
-			border: var(--button-border);
-			padding: var(--button-padding);
-			cursor: pointer;
-			color: var(--button-color);
-			border-radius: var(--button-border-radius);
+			--button-padding: 0.6em 2.2em;
 		}
 
 		button[type="submit"] {
-			background: var(--button-confirm-background);
+			--button-background: var(--button-confirm-background);
+			--button-active-background: var(--button-confirm-active-background);
 		}
 
 		button[type="reset"] {
-			background: var(--button-reject-background);
+			--button-background: var(--button-reject-background);
+			--button-active-background: var(--button-reject-active-background);
 		}
 	</style>
 	<dialog id="login-form-dialog" class="animation-speed-normal animation-ease-in-out fadeIn no-border">
 		<form name="login">
 			<fieldset class="no-border">
-				<label for="login-id">User ID</label>
+				<legend>
+					<slot name="legend"></slot>
+				</legend>
+				<label for="login-id">
+					<slot name="user-id-label">User ID</slot>
+				</label>
 				<input type="number" name="userid" id="login-id" min="0" max="999999" placeholder="######" autocomplete="username" required="" />
 				<br />
-				<label for="login-password">Password</label>
+				<label for="login-password">
+					<slot name="password-label">Password</slot>
+				</label>
 				<input type="password" name="password" id="login-password" placeholder="******" autocomplete="current-password" required="" />
 			</fieldset>
-			<button type="submit"><slot name="submit-btn">Submit</slot></button>
-			<button type="reset"><slot name="reset-btn">Reset</slot></button>
+			<button type="submit">
+				<slot name="submit-icon">Submit</slot>
+			</button>
+			<button type="reset">
+				<slot name="reset-icon">Reset</slot>
+			</button>
 		</form>
 	</dialog>
 </template>
