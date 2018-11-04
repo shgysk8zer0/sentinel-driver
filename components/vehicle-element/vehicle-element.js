@@ -29,9 +29,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 
 		$('[data-action="clear-driver"]', this.shadowRoot).click(async () => {
 			const driver = this.driver;
-			const resp = await confirm(`Are you sure you want to remove ${this.driver.name} from this vehicle?`);
-			console.log(resp);
-			if (driver instanceof HTMLElement && resp) {
+			if (driver instanceof HTMLElement && await confirm(`Are you sure you want to remove ${this.driver.name} from ${this.name}?`)) {
 				this.driver = null;
 			}
 		});
@@ -43,6 +41,11 @@ export default class HTMLVehicleElement extends HTMLElement {
 
 	set uid(id) {
 		this.setAttribute('uid', id);
+	}
+
+	get name() {
+		const nodes = this.shadowRoot.querySelector('slot[name="name"]').assignedNodes();
+		return nodes.length === 0 ? undefined : nodes[0].textContent;
 	}
 
 	get driver() {
