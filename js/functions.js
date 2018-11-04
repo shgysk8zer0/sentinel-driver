@@ -52,8 +52,9 @@ export async function loadData() {
 	try {
 		const drivers = [...units.drivers].map(driver => {
 			const el = new DriverElement();
-			el.slot = 'driver';
 			const name = document.createElement('span');
+			el.classList.add('card', 'shadow', 'block');
+			el.slot = 'driver';
 			name.textContent = driver.name;
 			name.slot = 'name';
 			el.append(name);
@@ -64,6 +65,7 @@ export async function loadData() {
 		const vehicles = [...units.vehicles].map(vehicle => {
 			const el = new VehicleElement();
 			const name = document.createElement('span');
+			el.title = vehicle.vehicle;
 			name.textContent = vehicle.vehicle;
 			name.slot = 'name';
 			el.append(name);

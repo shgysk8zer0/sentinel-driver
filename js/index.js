@@ -13,7 +13,10 @@ import {loadData} from './functions.js';
 
 ready().then(async () => {
 	$(document.documentElement).replaceClass('no-js', 'js');
-	$('link[name="icons"]').import('svg').then(icons => document.body.append(icons));
+	$('link[name="icons"]').import('svg').then(icons => {
+		$('svg', icons).attr({hidden: true});
+		document.body.append(icons);
+	});
 
 	document.addEventListener('login', async event => {
 		if (event.detail !== null && event.detail.hasOwnProperty('resp') && event.detail.hasOwnProperty('ownerInfo')) {
