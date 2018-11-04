@@ -1,20 +1,33 @@
----
-layout: null
----
 {
-	"version": "{{ site.version }}",
-	"name": "{{ site.title }}",
-	"short_name": "{{ site.short-name | default: site.title}}",
-	"description": "{{ site.description }}",
-	"start_url": "{{ page.url | absolute_url | replace: 'manifest.json', '' }}",
-	"lang": "{{ site.lang }}",
-	"display": "{{ site.display | default: 'standalone' }}",
-	"theme_color": "{{ site.theme-color }}",
-	"background_color": "{{ site.background-color | default: '#FEFEFE' }}",
-	"icons": {{ site.appicons | jsonify }},
-	"screenshots": {{ site.screenshots | jsonify }},
+	"version": "1.0.0",
+	"name": "Sentinel Driver",
+	"short_name": "Sentinel Driver",
+	"description": "Driver interface for SentinelPro",
+	"start_url": "/",
+	"lang": "en",
+	"display": "standalone",
+	"theme_color": "#2d89ef",
+	"background_color": "#FEFEFE",
+	"icons": [{
+    "src": "/img/favicon.svg",
+    "type": "image/svg+xml",
+    "sizes": "any"
+  }, {
+    "src": "/img/icon-512.png",
+    "type": "image/png",
+    "sizes": "512x512"
+  }, {
+    "src": "/img/icon-192.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+	"screenshots": [{
+    "src": "",
+    "type": "",
+    "sizes": ""
+  }],
 	"developer": {
 		"name": "Chris Zuber",
-		"url": "http://chriszuber.com"
+		"url": "http://shgysk8zer0.github.io"
 	}
 }
