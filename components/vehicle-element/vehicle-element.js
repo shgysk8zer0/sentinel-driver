@@ -1,4 +1,5 @@
 import {$} from '../../js/std-js/functions.js';
+// import {confirm} from '../../js/std-js/asyncDialog.js';
 
 export default class HTMLVehicleElement extends HTMLElement {
 	constructor() {
@@ -26,9 +27,11 @@ export default class HTMLVehicleElement extends HTMLElement {
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
 		});
 
-		$('[data-action="clear-driver"]', this.shadowRoot).click(() => {
+		$('[data-action="clear-driver"]', this.shadowRoot).click(async () => {
 			const driver = this.driver;
-			if (driver instanceof HTMLElement) {
+			const resp = await confirm(`Are you sure you want to remove ${this.driver.name} from this vehicle?`);
+			console.log(resp);
+			if (driver instanceof HTMLElement && resp) {
 				this.driver = null;
 			}
 		});
