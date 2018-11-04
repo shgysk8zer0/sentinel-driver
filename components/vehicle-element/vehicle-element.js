@@ -9,26 +9,27 @@ export default class HTMLVehicleElement extends HTMLElement {
 		this.classList.add('card', 'shadow');
 		this.addEventListener('drop', event => {
 			event.preventDefault();
+			console.log(event);
 			const driverUID = event.dataTransfer.getData('text/plain');
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
 			this.driver = driverUID;
 		});
 		this.addEventListener('dragover', event => {
 			event.preventDefault();
+			console.log(event);
 			this.shadowRoot.lastElementChild.classList.add('dragging');
 			event.dataTransfer.dropEffect = 'move';
 		});
 		this.addEventListener('dragleave', event => {
 			event.preventDefault();
+			console.log(event);
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
 		});
 
 		$('[data-action="clear-driver"]', this.shadowRoot).click(() => {
 			const driver = this.driver;
 			if (driver instanceof HTMLElement) {
-				const drivers = document.querySelector('driver-list');
-				driver.slot = 'drivers';
-				drivers.append(driver);
+				this.driver = null;
 			}
 		});
 	}
@@ -48,16 +49,29 @@ export default class HTMLVehicleElement extends HTMLElement {
 
 	set driver(driver) {
 		const drivers = document.querySelector('driver-list');
-		const driverEl = drivers.find(driver);
-		this.setAttribute('driverUid', driver);
-		if (driverEl instanceof HTMLElement) {
-			if (this.driver instanceof HTMLElement) {
-				drivers.append(this.driver);
+		const driverEl = drivers.find(driver) || this.list.findDriver(driver);
+		const currentDriver = this.driver;
+
+		if (driver === null && currentDriver instanceof HTMLElement) {
+			this.removeAttribute('driverUid');
+			drivers.append(currentDriver);
+			$('[data-action="clear-driver"]', this.shadowRoot).hide();
+		} else if (driverEl instanceof HTMLElement) {
+			if (currentDriver instanceof HTMLElement) {
+				drivers.append(currentDriver);
 			}
 			driverEl.slot = 'driver';
 			this.append(driverEl);
+			$('[data-action="clear-driver"]', this.shadowRoot).unhide();
 		}
+	}
 
+	get odometer() {
+		return this.shadowRoot.querySelector('[name="odometer"]');
+	}
+
+	get list() {
+		return this.closest('vehicle-list');
 	}
 }
 

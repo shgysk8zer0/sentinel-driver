@@ -48,10 +48,11 @@ export async function loadData() {
 		ownerid: sessionStorage.getItem('ownerId'),
 		token: sessionStorage.getItem('token'),
 	});
+	console.info(units);
 	try {
 		const drivers = [...units.drivers].map(driver => {
 			const el = new DriverElement();
-			el.slot = 'drivers';
+			el.slot = 'driver';
 			const name = document.createElement('span');
 			name.textContent = driver.name;
 			name.slot = 'name';
@@ -69,6 +70,11 @@ export async function loadData() {
 			el.uid = vehicle.vehicleid;
 			if (vehicle.driverid !== null) {
 				el.driver = vehicle.driverid;
+			}
+			vehicle.odometer = parseInt(vehicle.imei);
+
+			if (vehicle.odometer) {
+				el.odometer.value = vehicle.odometer;
 			}
 
 			if ('image' in vehicle) {

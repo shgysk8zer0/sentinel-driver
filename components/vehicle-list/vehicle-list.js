@@ -21,6 +21,12 @@ export default class HTMLVehicleListElement extends HTMLElement {
 		return this.vehicles.find(vehicle => vehicle.uid === id);
 	}
 
+	findDriver(id) {
+		id = parseInt(id);
+		const vehicle = this.vehicles.find(vehicle => vehicle.driver instanceof HTMLElement && vehicle.driver.uid === id);
+		return vehicle instanceof HTMLElement ? vehicle.driver : undefined;
+	}
+
 	add(...vehicles) {
 		vehicles.forEach(vehicle => {
 			vehicle.slot = 'vehicles';

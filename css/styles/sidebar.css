@@ -4,6 +4,15 @@ body > aside {
 	border-right: 1px solid var(--default-color);
 }
 
+driver-list {
+	height: calc(100vh - var(--nav-height) - var(--header-height));
+	overflow-y: auto;
+}
+
+driver-list.dragging {
+	border: 2px dashed blue;
+}
+
 driver-element {
 	cursor: grab;
 }
