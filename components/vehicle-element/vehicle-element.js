@@ -1,16 +1,22 @@
 import {$} from '../../js/std-js/functions.js';
+// import {confirm} from '../../js/std-js/asyncDialog.js';
 
 export default class HTMLVehicleElement extends HTMLElement {
 	constructor() {
 		super();
 		const template = document.getElementById('vehicle-element-template').content;
+		const list = document.querySelector('vehicle-list');
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
 		this.setAttribute('dropzone', 'move');
 		this.classList.add('card', 'shadow');
 		this.addEventListener('drop', event => {
 			event.preventDefault();
 			const driverUID = event.dataTransfer.getData('text/plain');
+			const vehicle = list.findByDriver(driverUID);
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
+			if (vehicle instanceof HTMLElement) {
+				vehicle.driver = null;
+			}
 			this.driver = driverUID;
 		});
 		this.addEventListener('dragover', event => {
@@ -23,12 +29,10 @@ export default class HTMLVehicleElement extends HTMLElement {
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
 		});
 
-		$('[data-action="clear-driver"]', this.shadowRoot).click(() => {
+		$('[data-action="clear-driver"]', this.shadowRoot).click(async () => {
 			const driver = this.driver;
-			if (driver instanceof HTMLElement) {
-				const drivers = document.querySelector('driver-list');
-				driver.slot = 'drivers';
-				drivers.append(driver);
+			if (driver instanceof HTMLElement && await confirm(`Are you sure you want to remove ${this.driver.name} from ${this.name}?`)) {
+				this.driver = null;
 			}
 		});
 	}
@@ -41,6 +45,18 @@ export default class HTMLVehicleElement extends HTMLElement {
 		this.setAttribute('uid', id);
 	}
 
+	get name() {
+		const nodes = this.shadowRoot.querySelector('slot[name="name"]').assignedNodes();
+		return nodes.length === 0 ? undefined : nodes[0].textContent;
+	}
+
+	set name(name) {
+		const el = document.createElement('span');
+		el.textContent = name;
+		el.slot = 'name';
+		this.append(el);
+	}
+
 	get driver() {
 		const drivers = this.shadowRoot.querySelector('slot[name="driver"]').assignedNodes();
 		return drivers.length !== 0 ? drivers[0]: undefined;
@@ -48,16 +64,29 @@ export default class HTMLVehicleElement extends HTMLElement {
 
 	set driver(driver) {
 		const drivers = document.querySelector('driver-list');
-		const driverEl = drivers.find(driver);
-		this.setAttribute('driverUid', driver);
-		if (driverEl instanceof HTMLElement) {
-			if (this.driver instanceof HTMLElement) {
-				drivers.append(this.driver);
+		const driverEl = drivers.find(driver) || this.list.findDriver(driver);
+		const currentDriver = this.driver;
+
+		if (driver === null && currentDriver instanceof HTMLElement) {
+			this.removeAttribute('driverUid');
+			currentDriver.remove();
+			$('[data-action="clear-driver"]', this.shadowRoot).hide();
+		} else if (driverEl instanceof HTMLElement) {
+			if (currentDriver instanceof HTMLElement) {
+				currentDriver.remove();
 			}
 			driverEl.slot = 'driver';
-			this.append(driverEl);
+			this.append(driverEl.cloneNode(true));
+			$('[data-action="clear-driver"]', this.shadowRoot).unhide();
 		}
+	}
 
+	get odometer() {
+		return this.shadowRoot.querySelector('[name="odometer"]');
+	}
+
+	get list() {
+		return document.querySelector('vehicle-list');
 	}
 }
 

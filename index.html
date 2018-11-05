@@ -3,6 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="referrer" content="origin-when-cross-origin" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="msapplication-config" content="/browserconfig.xml" />
+		<meta name="msapplication-TileImage" content="/img/mstile-150x150.png" />
 		<title>Sentinel Driver</title>
 		<script type="module" src="/js/index.js" async=""></script>
 		<link rel="stylesheet" href="/css/styles/index.css" media="all" />
@@ -12,6 +16,12 @@
 		<link rel="import" href="/components/driver-list/driver-list.html" name="DriverList" async="" />
 		<link rel="import" href="/components/driver-element/driver-element.html" name="DriverElement" async="" />
 		<link rel="import" href="/img/icons.svg" name="icons" async="" />
+		<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any" />
+		<link rel="icon" href="/img/icon-32.png" type="image/png" sizes="32x32" />
+		<link rel="icon" href="/img/icon-16.png" type="image/png" sizes="16x16" />
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon.png" sizes="180x180" />
+		<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2d89ef" />
+		<link rel="manifest" href="/manifest.json" />
 	</head>
 	<body class="color-default background-primary font-main border-box grid">
 		<header></header>
@@ -28,16 +38,16 @@
 			</button>
 		</nav>
 		<aside>
-			<driver-list></driver-list>
+			<driver-list class="block"></driver-list>
 		</aside>
 		<main>
-			<vehicle-list></vehicle-list>
+			<vehicle-list class="block"></vehicle-list>
 		</main>
 		<footer>
 			<span>&copy;</span>
 			<time is="current-year"></time>
 		</footer>
-		<login-form action="vehicles.json">
+		<login-form>
 			<span slot="legend">Login Credentials</span>
 			<svg class="current-color icon" slot="submit-icon">
 				<use xlink:href="#sign-in" />
