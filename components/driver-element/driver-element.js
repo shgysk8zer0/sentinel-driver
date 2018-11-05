@@ -39,6 +39,13 @@ export default class HTMLDriverElement extends HTMLElement {
 		const nodes = this.shadowRoot.querySelector('slot[name="name"]').assignedNodes();
 		return nodes.length === 0 ? undefined : nodes[0].textContent;
 	}
+
+	set name(name) {
+		const el = document.createElement('span');
+		el.slot = 'name';
+		el.textContent = name;
+		this.append(el);
+	}
 }
 
 $('link[name="DriverElement"]').import('template').then(frag => {

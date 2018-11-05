@@ -48,6 +48,13 @@ export default class HTMLVehicleElement extends HTMLElement {
 		return nodes.length === 0 ? undefined : nodes[0].textContent;
 	}
 
+	set name(name) {
+		const el = document.createElement('span');
+		el.textContent = name;
+		el.slot = 'name';
+		this.append(el);
+	}
+
 	get driver() {
 		const drivers = this.shadowRoot.querySelector('slot[name="driver"]').assignedNodes();
 		return drivers.length !== 0 ? drivers[0]: undefined;
@@ -60,14 +67,14 @@ export default class HTMLVehicleElement extends HTMLElement {
 
 		if (driver === null && currentDriver instanceof HTMLElement) {
 			this.removeAttribute('driverUid');
-			drivers.append(currentDriver);
+			currentDriver.remove();
 			$('[data-action="clear-driver"]', this.shadowRoot).hide();
 		} else if (driverEl instanceof HTMLElement) {
 			if (currentDriver instanceof HTMLElement) {
-				drivers.append(currentDriver);
+				currentDriver.remove();
 			}
 			driverEl.slot = 'driver';
-			this.append(driverEl);
+			this.append(driverEl.cloneNode(true));
 			$('[data-action="clear-driver"]', this.shadowRoot).unhide();
 		}
 	}
@@ -77,7 +84,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get list() {
-		return this.closest('vehicle-list');
+		return document.querySelector('vehicle-list');
 	}
 }
 

@@ -9,7 +9,6 @@ import '../components/driver-element/driver-element.js';
 import '../components/login-button.js';
 import '../components/logout-button.js';
 import '../components/current-year.js';
-import {loadData} from './functions.js';
 
 ready().then(async () => {
 	$(document.documentElement).replaceClass('no-js', 'js');
@@ -17,6 +16,14 @@ ready().then(async () => {
 		$('svg', icons).attr({hidden: true});
 		document.body.append(icons);
 	});
+
+	await Promise.all([
+		'vehicle-list',
+		'driver-list',
+		'vehicle-element',
+		'driver-element',
+		'login-form',
+	].map(tag => customElements.whenDefined(tag)));
 
 	document.addEventListener('login', async event => {
 		if (event.detail !== null && event.detail.hasOwnProperty('resp') && event.detail.hasOwnProperty('ownerInfo')) {
@@ -31,12 +38,10 @@ ready().then(async () => {
 				icon: new URL('/img/icon-192.png', document.baseURI),
 			});
 		}
-		loadData();
 	});
 
 	document.addEventListener('logout', () => {
 		sessionStorage.clear();
-		$('vehicle-element, driver-element').remove();
 	});
 
 	if (sessionStorage.hasOwnProperty('token')) {
