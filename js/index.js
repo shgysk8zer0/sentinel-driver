@@ -1,6 +1,6 @@
 import './std-js/deprefixer.js';
 import './std-js/shims.js';
-import {ready, $, notify} from './std-js/functions.js';
+import {ready, $, notify, registerServiceWorker} from './std-js/functions.js';
 import '../components/login-form/login-form.js';
 import '../components/vehicle-list/vehicle-list.js';
 import '../components/vehicle-element/vehicle-element.js';
@@ -11,6 +11,9 @@ import '../components/logout-button.js';
 import '../components/current-year.js';
 
 ready().then(async () => {
+	if (document.documentElement.dataset.hasOwnProperty('serviceWorker') /*&& location.hostname !== 'localhost'*/) {
+		registerServiceWorker(document.documentElement.dataset.serviceWorker);
+	}
 	$(document.documentElement).replaceClass('no-js', 'js');
 	$('link[name="icons"]').import('svg').then(icons => {
 		$('svg', icons).attr({hidden: true});
