@@ -12,7 +12,6 @@ export default class HTMLDriverElement extends HTMLElement {
 		const template = document.getElementById('driver-element-template').content;
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
 		this.addEventListener('dragstart', event => {
-			console.log(event);
 			event.dataTransfer.setData('text/plain', this.uid);
 			event.dropEffect = 'move';
 		}, {
@@ -21,7 +20,6 @@ export default class HTMLDriverElement extends HTMLElement {
 		});
 		this.addEventListener('dragend', event => {
 			event.preventDefault();
-			console.log(event);
 		}, {
 			capture: true,
 		});

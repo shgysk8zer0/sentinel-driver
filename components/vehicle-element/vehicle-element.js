@@ -5,25 +5,27 @@ export default class HTMLVehicleElement extends HTMLElement {
 	constructor() {
 		super();
 		const template = document.getElementById('vehicle-element-template').content;
+		const list = document.querySelector('vehicle-list');
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
 		this.setAttribute('dropzone', 'move');
 		this.classList.add('card', 'shadow');
 		this.addEventListener('drop', event => {
 			event.preventDefault();
-			console.log(event);
 			const driverUID = event.dataTransfer.getData('text/plain');
+			const vehicle = list.findByDriver(driverUID);
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
+			if (vehicle instanceof HTMLElement) {
+				vehicle.driver = null;
+			}
 			this.driver = driverUID;
 		});
 		this.addEventListener('dragover', event => {
 			event.preventDefault();
-			console.log(event);
 			this.shadowRoot.lastElementChild.classList.add('dragging');
 			event.dataTransfer.dropEffect = 'move';
 		});
 		this.addEventListener('dragleave', event => {
 			event.preventDefault();
-			console.log(event);
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
 		});
 

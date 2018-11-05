@@ -9,23 +9,22 @@ export default class HTMLDriverListElement extends HTMLElement {
 		this.setAttribute('dropzone', 'move');
 		this.addEventListener('drop', event => {
 			event.preventDefault();
-			console.log(event);
+			const vehicleList = document.querySelector('vehicle-list');
 			const driverUID = event.dataTransfer.getData('text/plain');
+			const vehicle = vehicleList.findByDriver(driverUID);
 			const driver = document.querySelector('vehicle-list').findDriver(driverUID);
 			this.classList.remove('dragging');
 			if (driver instanceof HTMLElement) {
-				this.append(driver);
+				vehicle.driver = null;
 			}
 		});
 		this.addEventListener('dragover', event => {
 			event.preventDefault();
-			console.log(event);
 			this.classList.add('dragging');
 			event.dataTransfer.dropEffect = 'move';
 		});
 		this.addEventListener('dragleave', event => {
 			event.preventDefault();
-			console.log(event);
 			this.classList.remove('dragging');
 		});
 
