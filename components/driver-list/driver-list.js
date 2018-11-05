@@ -45,10 +45,13 @@ export default class HTMLDriverListElement extends HTMLElement {
 					const json = await resp.json();
 					if ('error' in json) {
 						throw new Error(`${resp.messager} [${resp.error}]`);
+					} else {
+						const drivers = json.map(driver => {
 							const el = new HTMLDriverElement();
 							el.name = driver.name;
 							el.uid = driver.driverid;
 							el.slot = 'driver';
+							el.classList.add('card', 'shadow', 'block');
 							return el;
 						});
 						this.append(...drivers);
