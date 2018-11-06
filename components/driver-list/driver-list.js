@@ -7,22 +7,25 @@ export default class HTMLDriverListElement extends HTMLElement {
 		const template = document.getElementById('driver-list-template').content;
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
 		this.setAttribute('dropzone', 'move');
+
 		this.addEventListener('drop', event => {
 			event.preventDefault();
 			const vehicleList = document.querySelector('vehicle-list');
-			const driverUID = event.dataTransfer.getData('text/plain');
-			const vehicle = vehicleList.findByDriver(driverUID);
-			const driver = document.querySelector('vehicle-list').findDriver(driverUID);
+			const data = JSON.parse(event.dataTransfer.getData('application/json'));
 			this.classList.remove('dragging');
-			if (driver instanceof HTMLElement) {
+
+			if (data.vehicle) {
+				const vehicle = vehicleList.find(data.vehicle.uid);
 				vehicle.driver = null;
 			}
 		});
+
 		this.addEventListener('dragover', event => {
 			event.preventDefault();
 			this.classList.add('dragging');
-			event.dataTransfer.dropEffect = 'move';
+
 		});
+
 		this.addEventListener('dragleave', event => {
 			event.preventDefault();
 			this.classList.remove('dragging');
