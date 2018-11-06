@@ -11,18 +11,23 @@ export default class HTMLDriverElement extends HTMLElement {
 		this.draggable = true;
 		const template = document.getElementById('driver-element-template').content;
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
+
 		this.addEventListener('dragstart', event => {
-			event.dataTransfer.setData('text/plain', this.uid);
-			event.dropEffect = 'move';
+			event.dataTransfer.dropEffect = this.matches('driver-list driver-element') ? 'copy' : 'move';
+			event.dataTransfer.effectAllowed = this.matches('driver-list driver-element') ? 'copy' : 'move';
+			event.dataTransfer.setData('application/json', JSON.stringify(this));
 		}, {
 			capture: true,
 			passive: true,
 		});
-		this.addEventListener('dragend', event => {
-			event.preventDefault();
-		}, {
-			capture: true,
-		});
+	}
+
+	toJSON() {
+		return {
+			uid: this.uid,
+			name: this.name,
+			vehicle: this.vehicle,
+		};
 	}
 
 	get uid() {
@@ -43,6 +48,10 @@ export default class HTMLDriverElement extends HTMLElement {
 		el.slot = 'name';
 		el.textContent = name;
 		this.append(el);
+	}
+
+	get vehicle() {
+		return this.matches('vehicle-element driver-element') ? this.closest('vehicle-element') : null;
 	}
 }
 

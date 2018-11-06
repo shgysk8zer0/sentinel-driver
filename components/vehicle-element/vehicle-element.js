@@ -5,25 +5,26 @@ export default class HTMLVehicleElement extends HTMLElement {
 	constructor() {
 		super();
 		const template = document.getElementById('vehicle-element-template').content;
-		const list = document.querySelector('vehicle-list');
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
-		this.setAttribute('dropzone', 'move');
+		this.setAttribute('dropzone', 'move, copy');
 		this.classList.add('card', 'shadow');
+
 		this.addEventListener('drop', event => {
 			event.preventDefault();
-			const driverUID = event.dataTransfer.getData('text/plain');
-			const vehicle = list.findByDriver(driverUID);
+			const data = JSON.parse(event.dataTransfer.getData('application/json'));
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
-			if (vehicle instanceof HTMLElement) {
+			if (data.vehicle) {
+				const vehicle = this.list.find(data.vehicle.uid);
 				vehicle.driver = null;
 			}
-			this.driver = driverUID;
+			this.driver = data.uid;
 		});
+
 		this.addEventListener('dragover', event => {
 			event.preventDefault();
 			this.shadowRoot.lastElementChild.classList.add('dragging');
-			event.dataTransfer.dropEffect = 'move';
 		});
+
 		this.addEventListener('dragleave', event => {
 			event.preventDefault();
 			this.shadowRoot.lastElementChild.classList.remove('dragging');
@@ -35,6 +36,14 @@ export default class HTMLVehicleElement extends HTMLElement {
 				this.driver = null;
 			}
 		});
+	}
+
+	toJSON() {
+		return {
+			uid: this.uid,
+			name: this.name,
+			odometer: this.odometer.value,
+		};
 	}
 
 	get uid() {
