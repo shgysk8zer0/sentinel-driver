@@ -1,5 +1,5 @@
 const config = {
-	version: '1.0.1',
+	version: '1.0.2',
 	caches: [
 		'/',
 		// JS
@@ -11,6 +11,7 @@ const config = {
 		'/js/consts.js',
 		'/js/std-js/esQuery.js',
 		'/js/functions.js',
+		'/js/std-js/asyncDialog.js',
 		// Custom Elements
 		'/components/login-form/login-form.js',
 		'/components/login-button.js',
@@ -47,75 +48,58 @@ const config = {
 		'/components/vehicle-list/vehicle-list.html',
 		'/components/driver-list/driver-list.html',
 		'/components/driver-element/driver-element.html',
-
-		// Logos
-		// '/img/logos/facebook.svg',
-		// '/img/logos/twitter.svg',
-		// '/img/logos/linkedin.svg',
-		// '/img/logos/google-plus.svg',
-		// '/img/logos/reddit.svg',
-		// '/img/logos/gmail.svg',
-
 		// Fonts
-		'/fonts/Alice.woff2',
 		'/fonts/roboto.woff2',
 	].map(path => new URL(path, location.origin)),
 	ignored: [
-		'/service-worker.js',
 		'/manifest.json',
-	],
-	paths: [
-		'/js/',
-		'/css/',
-		'/img/',
-	],
-	hosts: [
-		'secure.gravatar.com',
-		'i.imgur.com',
-		'cdn.polyfill.io',
-	],
+		'/service-worker.js',
+	].map(path => new URL(path, location.origin)),
 };
 
-addEventListener('install', async () => {
+async function deleteOldCaches() {
+	const keys = await caches.keys();
+	const filtered = keys.filter(v => v !== config.version);
+	await Promise.all(filtered.map(v => caches.delete(v)));
+}
+
+function isValid(request) {
+	const reqUrl = new URL(request.url);
+	return request.method === 'GET'
+		&& reqUrl.origin === location.origin
+		&& ! config.ignored.some(url => {
+			return reqUrl.href === url.href;
+		});
+}
+
+self.addEventListener('install', async () => {
 	const cache = await caches.open(config.version);
+	await deleteOldCaches();
 	await cache.addAll(config.caches);
 	skipWaiting();
 });
 
-addEventListener('activate', event => {
+self.addEventListener('activate', event => {
 	event.waitUntil(async function() {
 		clients.claim();
 	}());
 });
 
-function isValid(req) {
-	try {
-		const url = new URL(req.url);
-		const isGet = req.method === 'GET';
-		const allowedHost = config.hosts.includes(url.host);
-		const isHome = ['/', '/index.html', '/index.php'].some(path => url.pathname === path);
-		const notIgnored = config.ignored.every(path => url.pathname !== path);
-		const allowedPath = config.paths.some(path => url.pathname.startsWith(path));
-
-		return isGet && (allowedHost || (isHome || (allowedPath && notIgnored)));
-	} catch(err) {
-		console.error(err);
-		return false;
-	}
-}
-
-async function get(request) {
-	const cache = await caches.open(config.version);
-	const cached = await cache.match(request);
-
-	if (cached instanceof Response) {
-		return cached;
-	}
-}
-
-addEventListener('fetch', async event => {
+self.addEventListener('fetch', event => {
 	if (isValid(event.request)) {
-		// console.log(event.request.url);
-		event.respondWith(get(event.request));
+		event.respondWith(async function() {
+			const cache = await caches.open(config.version);
+			const cached = await cache.match(event.request);
+
+			if (cached instanceof Response) {
+				return cached;
+			} else {
+				const url = new URL(event.request.url);
+				if (url.origin === location.origin) {
+					event.waitUntil(cache.add(event.request));
+				}
+				return fetch(event.request);
+			}
+		}());
 	}
 });

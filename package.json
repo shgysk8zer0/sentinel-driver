@@ -1,6 +1,6 @@
 {
   "name": "sentinel-driver",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Driver interface for SentinelPro",
   "private": true,
   "config": {
@@ -37,6 +37,7 @@
   "devDependencies": {
     "eslint": "^5.7.0",
     "eslint-plugin-async-await": "0.0.0",
+    "eslint-plugin-babel": "^5.2.1",
     "stylelint": "^9.6.0",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-standard": "^18.2.0",

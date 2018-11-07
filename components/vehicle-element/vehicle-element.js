@@ -1,5 +1,5 @@
 import {$} from '../../js/std-js/functions.js';
-// import {confirm} from '../../js/std-js/asyncDialog.js';
+import {confirm} from '../../js/std-js/asyncDialog.js';
 
 export default class HTMLVehicleElement extends HTMLElement {
 	constructor() {
