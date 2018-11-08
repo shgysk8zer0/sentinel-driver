@@ -12,7 +12,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 		this.addEventListener('drop', event => {
 			event.preventDefault();
 			const data = JSON.parse(event.dataTransfer.getData('application/json'));
-			this.shadowRoot.lastElementChild.classList.remove('dragging');
+			this.classList.remove('dragging');
 			if (data.vehicle) {
 				const vehicle = this.list.find(data.vehicle.uid);
 				vehicle.driver = null;
@@ -22,12 +22,12 @@ export default class HTMLVehicleElement extends HTMLElement {
 
 		this.addEventListener('dragover', event => {
 			event.preventDefault();
-			this.shadowRoot.lastElementChild.classList.add('dragging');
+			this.classList.add('dragging');
 		});
 
 		this.addEventListener('dragleave', event => {
 			event.preventDefault();
-			this.shadowRoot.lastElementChild.classList.remove('dragging');
+			this.classList.remove('dragging');
 		});
 
 		$('[data-action="clear-driver"]', this.shadowRoot).click(async () => {
@@ -63,6 +63,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 		const el = document.createElement('span');
 		el.textContent = name;
 		el.slot = 'name';
+		this.title = name;
 		this.append(el);
 	}
 
@@ -85,6 +86,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 				currentDriver.remove();
 			}
 			driverEl.slot = 'driver';
+			driverEl.classList.remove('dragging');
 			this.append(driverEl.cloneNode(true));
 			$('[data-action="clear-driver"]', this.shadowRoot).unhide();
 		}

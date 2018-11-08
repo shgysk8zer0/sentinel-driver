@@ -2,3 +2,21 @@ main {
 	grid-area: main;
 	overflow-y: auto;
 }
+
+vehicle-element.dragging, driver-list.dragging {
+	border: 2px dashed #3e57af;
+}
+
+driver-element {
+	transition: background-color 400ms ease-in-out, transform 300ms ease-in-out;
+	margin-bottom: 0.2rem;
+	cursor: grab;
+}
+
+driver-element:hover {
+	transform: scale(1.2);
+}
+
+driver-element.card.dragging {
+	background-color: #bebebe;
+}

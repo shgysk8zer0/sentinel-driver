@@ -2,17 +2,15 @@ body > aside {
 	grid-area: sidebar;
 	overflow-y: auto;
 	border-right: 1px solid var(--default-color);
+	position: sticky;
+	top: var(--nav-height);
 }
 
 driver-list {
-	height: calc(100vh - var(--nav-height) - var(--header-height));
+	height: calc(100vh - var(--nav-height));
 	overflow-y: auto;
 }
 
 driver-list.dragging {
 	border: 2px dashed blue;
-}
-
-driver-element {
-	cursor: grab;
 }

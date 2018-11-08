@@ -2,5 +2,6 @@ body > nav {
 	grid-area: nav;
 	height: var(--nav-height, 2rem);
 	background: inherit;
-	padding: 0.1rem;
+	padding: 0.3rem 0.3rem;
+	background: linear-gradient(#b4b4b4, #acacac);
 }

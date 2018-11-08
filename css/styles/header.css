@@ -1,3 +1,7 @@
 body > header {
 	grid-area: header;
+	background-image: var(--header-bg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }

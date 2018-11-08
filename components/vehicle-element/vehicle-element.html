@@ -5,11 +5,24 @@
 		}
 
 		.vehicle-img {
-			max-width: 4rem;
+			padding: 0.8rem;
+			border-radius: 8px;
+			border: 1px solid rgba(148, 148, 148, 0.65);
+			margin: 0.2rem;
+			color: #656565;
+			transition: color 300ms ease-in-out;
 		}
 
-		.vehicle.dragging {
-			border: 2px dashed blue;
+		.vehicle-img:hover {
+			color: #282828;
+		}
+
+		.vehicle-img svg {
+			fill: currentColor;
+		}
+
+		.center {
+			text-align: center;
 		}
 
 		.icon {
@@ -29,8 +42,12 @@
 			display: inline-block;
 		}
 
-		[name="odometer"] {
+		input {
 			padding: 0.2em;
+			background: inherit;
+			border-width: 0 0 1px 0;
+			border-style: solid;
+			border-color: #b3b3b3;
 		}
 
 		button {
@@ -49,8 +66,8 @@
 		}
 	</style>
 	<div class="vehicle" draggable="true">
-		<h3 class="vehicle-name inline-block">
-			<slot name="name">Unnamed Vehicle</slot>
+		<h3 class="vehicle-name center">
+			<slot name="name" class="inline-block">Unnamed Vehicle</slot>
 		</h3>
 		<form>
 			<label class="inline-block" title="Odometer">
@@ -60,9 +77,9 @@
 				<input type="number" name="odometer" placeholder="######" min="0" />
 			</label>
 		</form>
-		<div class="vehicle-img inline-block">
-			<slot name="image">
-				<svg viewBox="0 0 27.767 25.113" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+		<div class="vehicle-img center">
+			<slot name="image" class="inline-bock">
+				<svg viewBox="0 0 27.767 25.113" xmlns="http://www.w3.org/2000/svg">
 			    <path d="M13.896.263C13.78.26 13.66.26 8.01.268c-1.72 0-2.633 1.014-3.054 2.2L2.72 8.695C1.833 8.818.263 9.942.263 12.068v7.923H2.44v2.53c0 3.116 4.089 3.08 4.089 0v-2.53h14.709v2.53c0 3.08 4.088 3.116 4.088 0v-2.53h2.176v-7.923c0-2.126-1.571-3.25-2.458-3.373l-2.237-6.227c-.421-1.186-1.334-2.2-3.054-2.2-5.631 0-5.741-.003-5.856-.005zM7.984 2.537h11.794c.737.007 1.053.505 1.264 1.193l1.685 4.819H5.036L6.72 3.73c.21-.688.527-1.186 1.264-1.193zm-3.436 8.41c1.043 0 1.89.94 1.89 2.1 0 1.16-.847 2.1-1.89 2.1s-1.888-.94-1.888-2.1c0-1.16.845-2.1 1.888-2.1zm18.667 0c1.043 0 1.888.94 1.888 2.1 0 1.16-.845 2.1-1.888 2.1s-1.89-.94-1.89-2.1c0-1.16.847-2.1 1.89-2.1z"/>
 				</svg>
 			</slot>
