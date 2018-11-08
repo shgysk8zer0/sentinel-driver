@@ -1,5 +1,5 @@
 const config = {
-	version: '1.0.2',
+	version: '1.0.3',
 	caches: [
 		'/',
 		// JS
@@ -55,6 +55,10 @@ const config = {
 		'/manifest.json',
 		'/service-worker.js',
 	].map(path => new URL(path, location.origin)),
+	origins: [
+		location.origin,
+		'https://i.imgur.com',
+	],
 };
 
 async function deleteOldCaches() {
@@ -66,7 +70,7 @@ async function deleteOldCaches() {
 function isValid(request) {
 	const reqUrl = new URL(request.url);
 	return request.method === 'GET'
-		&& reqUrl.origin === location.origin
+		&& config.origins.includes(reqUrl.origin)
 		&& ! config.ignored.some(url => {
 			return reqUrl.href === url.href;
 		});

@@ -1,14 +1,34 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" dir="ltr" data-service-worker="service-worker.js">
+<html class="no-js" lang="en" dir="ltr" itemtype="http://schema.org/WebPage" itemref="org-info" itemscope="" data-service-worker="service-worker.js">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content="Driver interface for SentinelPro" />
+		<meta itemprop="description" content="Driver interface for SentinelPro" />
+		<meta name="keywords" content="vrmt, Sentinel, driver" />
+		<meta itemprop="keywords" content="vrmt, Sentinel, driver" />
 		<meta name="referrer" content="origin-when-cross-origin" />
+		<meta itemprop="thumbnailUrl" content="https://stupefied-liskov-be143f.netlify.com/img/icon-512.png" />
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="theme-color" content="#2d89ef" />
 		<meta name="msapplication-config" content="/browserconfig.xml" />
 		<meta name="msapplication-TileImage" content="/img/mstile-150x150.png" />
-		<title>Sentinel Driver</title>
+		<!-- Open Graph (Facebook) -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Sentinel Driver" />
+		<meta property="og:site_name" content="Sentinel Driver" />
+		<meta property="og:url" content="https://stupefied-liskov-be143f.netlify.com/" />
+		<meta property="og:image" content="https://stupefied-liskov-be143f.netlify.com/img/icon-512.png" />
+		<meta property="og:description" content="Driver interface for SentinelPro" />
+		<meta property="og:locale" content="en_US" />
+		<!-- End Open Graph -->
+		<!-- Twitter Card -->
+		<meta name="twitter:site" content="DrvWithSentinel" />
+		<meta name="twitter:title" content="Sentinel Driver" />
+		<meta name="twitter:description" content="Driver interface for SentinelPro" />
+		<meta name="twitter:image" content="https://stupefied-liskov-be143f.netlify.com/img/icon-512.png" />
+		<!-- End Twitter Card -->
+		<title itemprop="headline">Sentinel Driver</title>
 		<script type="module" src="/js/index.js" async=""></script>
 		<link rel="stylesheet" href="/css/styles/index.css" media="all" />
 		<link rel="import" href="/components/login-form/login-form.html" name="LoginForm" async="" />
@@ -17,6 +37,7 @@
 		<link rel="import" href="/components/driver-list/driver-list.html" name="DriverList" async="" />
 		<link rel="import" href="/components/driver-element/driver-element.html" name="DriverElement" async="" />
 		<link rel="import" href="/img/icons.svg" name="icons" async="" />
+		<link rel="dns-prefetch" href="https://www.vrmtel.net" />
 		<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any" />
 		<link rel="icon" href="/img/icon-32.png" type="image/png" sizes="32x32" />
 		<link rel="icon" href="/img/icon-16.png" type="image/png" sizes="16x16" />
@@ -26,27 +47,82 @@
 	</head>
 	<body class="color-default background-primary font-main border-box grid">
 		<header></header>
-		<nav class="flex row no-wrap sticky top shadow z-4">
-			<button is="login-button" title="Login">
+		<nav class="flex row no-wrap sticky top shadow-dark z-4">
+			<button is="login-button" title="Login" hidden="">
 				<svg class="current-color icon">
 					<use xlink:href="#sign-in" />
 				</svg>
 			</button>
-			<button is="logout-button" title="Logout">
+			<button is="logout-button" title="Logout" hidden="">
 				<svg class="current-color icon">
 					<use xlink:href="#sign-out" />
 				</svg>
 			</button>
 		</nav>
-		<aside>
+		<aside role="complementary" itemtype="http://schema.org/WPSideBar" itemscope="">
 			<driver-list class="block"></driver-list>
 		</aside>
 		<main>
 			<vehicle-list class="block"></vehicle-list>
 		</main>
-		<footer>
+		<footer class="relative z-1" role="contentinfo">
+			<div id="org-info" itemprop="copyrightHolder" itemtype="http://schema.org/Organization" itemscope="">
+				<h3>
+					<a href="https://www.drivewithsentinel.com/" itemprop="url">
+						<meta itemprop="name" content="Sentinel" />
+						<img itemprop="image" src="/img/logo.png" alt="Sentinel" />
+					</a>
+				</h3>
+				<div class="contact-links">
+					<div>
+						<a href="tel:+1-661-249-4393" class="inline-block" content="+1-661-249-4393" itemprop="telephone" title="661-249-4393">
+							<svg class="current-color icon">
+								<use xlink:href="#call-start" />
+							</svg>
+							<span>661-249-4393</span>
+						</a>
+					</div>
+					<div>
+						<a href="mailto:info@drivewithsentinel.com" class="inline-block" itemprop="email" content="info@drivewithsentinel.com" title="info@drivewithsentinel.com">
+							<svg class="current-color icon">
+								<use xlink:href="#mail-read" />
+							</svg>
+							<span>info@drivewithsentinel.com</span>
+						</a>
+					</div>
+				</div>
+				<address itemprop="address" itemtype="http://schema.org/PostalAddress" itemscope="">
+					<div itemprop="streetAddress">27240 Turnberry Lane Suite 200</div>
+					<div>
+						<span itemprop="addressLocality">Valencia</span>,
+						<span itemprop="addressRegion">CA</span>
+						<span itemprop="postalCode">91355</span>
+						<meta itemprop="addressCountry" content="USA" />
+				</address>
+				<hr />
+				<div class="social-icons flex row no-wrap">
+					<a href="https://www.facebook.com/Drive-With-Sentinel-746644742040088/" target="_blank" itemprop="sameAs" class="social-link inline-block" rel="noreferrer external" title="Facebook">
+						<svg class="icon">
+							<use xlink:href="#facebook" />
+						</svg>
+					</a>
+					<a href="https://www.linkedin.com/company-beta/7602851?pathWildcard=7602851" target="_blank" itemprop="sameAs" class="social-link inline-block" rel="noreferrer external" title="LinkedIn">
+						<svg class="icon">
+							<use xlink:href="#linkedin" />
+						</svg>
+					</a>
+					<a href="https://twitter.com/DrvWithSentinel" target="_blank" itemprop="sameAs" class="social-link inline-block" rel="noreferrer external" title="Twitter">
+						<svg class="icon">
+							<use xlink:href="#twitter" />
+						</svg>
+					</a>
+				</div>
+			</div>
 			<span>&copy;</span>
-			<time is="current-year"></time>
+			<time>2015</time>
+			<span>&mdash;</span>
+			<time is="current-year" itemprop="copyrightYear">2018</time>
+			<string>All Rights Reserved</strong>
 		</footer>
 		<login-form>
 			<span slot="legend">Login Credentials</span>
@@ -58,3 +134,4 @@
 			</svg>
 		</login-form>
 	</body>
+</html>

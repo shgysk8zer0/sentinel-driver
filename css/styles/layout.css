@@ -9,7 +9,7 @@ body.grid {
 	'nav nav nav'
 	'sidebar main .'
 	'footer footer footer';
-	grid-template-rows: var(--header-height, auto) var(--nav-height) minmax(calc(100vh - var(--nav-height)), auto);
+	grid-template-rows: var(--header-height, auto) var(--nav-height) minmax(calc(100vh - var(--nav-height) - var(--header-height) - var(--footer-height)), auto);
 	grid-template-columns: 18vw 1fr 1rem;
-	grid-gap: 0.7rem;
+	grid-column-gap: 0.7rem;
 }

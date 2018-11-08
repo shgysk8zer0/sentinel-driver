@@ -13,9 +13,17 @@ export default class HTMLDriverElement extends HTMLElement {
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
 
 		this.addEventListener('dragstart', event => {
+			this.classList.add('dragging');
 			event.dataTransfer.dropEffect = this.matches('driver-list driver-element') ? 'copy' : 'move';
 			event.dataTransfer.effectAllowed = this.matches('driver-list driver-element') ? 'copy' : 'move';
 			event.dataTransfer.setData('application/json', JSON.stringify(this));
+		}, {
+			capture: true,
+			passive: true,
+		});
+
+		this.addEventListener('dragend', () => {
+			this.classList.remove('dragging');
 		}, {
 			capture: true,
 			passive: true,
@@ -47,6 +55,7 @@ export default class HTMLDriverElement extends HTMLElement {
 		const el = document.createElement('span');
 		el.slot = 'name';
 		el.textContent = name;
+		this.title = name;
 		this.append(el);
 	}
 

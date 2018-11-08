@@ -1,5 +1,5 @@
 {
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"name": "Sentinel Driver",
 	"short_name": "Sentinel Drv",
 	"description": "Driver interface for SentinelPro",
@@ -22,9 +22,9 @@
     "sizes": "192x192"
   }],
 	"screenshots": [{
-    "src": "",
-    "type": "",
-    "sizes": ""
+    "src": "https://i.imgur.com/dYhDnrkl.jpg",
+    "type": "image/jpeg",
+    "sizes": "640x360"
   }],
 	"developer": {
 		"name": "Chris Zuber",
