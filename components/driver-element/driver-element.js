@@ -11,6 +11,9 @@ export default class HTMLDriverElement extends HTMLElement {
 		this.draggable = true;
 		const template = document.getElementById('driver-element-template').content;
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
+		this.classList.toggle('no-pointer-event', ! navigator.onLine);
+		window.addEventListener('offline', () => this.classList.add('no-pointer-events'));
+		window.addEventListener('online', () => this.classList.remove('no-pointer-events'));
 
 		this.addEventListener('dragstart', event => {
 			this.classList.add('dragging');
@@ -60,7 +63,7 @@ export default class HTMLDriverElement extends HTMLElement {
 	}
 
 	get vehicle() {
-		return this.matches('vehicle-element driver-element') ? this.closest('vehicle-element') : null;
+		return this.isConnected ? this.closest('vehicle-element') : null;
 	}
 }
 

@@ -9,6 +9,15 @@ import '../components/driver-element/driver-element.js';
 import '../components/login-button.js';
 import '../components/logout-button.js';
 import '../components/current-year.js';
+import '../components/offline-message.js';
+
+async function online() {
+	if (! navigator.onLine) {
+		await new Promise(resolve => {
+			window.addEventListener('online', () => resolve(), {once: true});
+		});
+	}
+}
 
 ready().then(async () => {
 	if (document.documentElement.dataset.hasOwnProperty('serviceWorker') /*&& location.hostname !== 'localhost'*/) {
@@ -47,6 +56,7 @@ ready().then(async () => {
 		sessionStorage.clear();
 	});
 
+	await online();
 	if (sessionStorage.hasOwnProperty('token')) {
 		document.dispatchEvent(new CustomEvent('login'));
 	}

@@ -1,5 +1,5 @@
 const config = {
-	version: '1.0.3',
+	version: '1.0.4',
 	caches: [
 		'/',
 		// JS
@@ -96,12 +96,12 @@ self.addEventListener('fetch', event => {
 			const cached = await cache.match(event.request);
 
 			if (cached instanceof Response) {
-				return cached;
-			} else {
-				const url = new URL(event.request.url);
-				if (url.origin === location.origin) {
-					event.waitUntil(cache.add(event.request));
+				if (navigator.onLine) {
+					cache.add(event.request);
 				}
+				return cached;
+			} else if (navigator.onLine) {
+				event.waitUntil(cache.add(event.request));
 				return fetch(event.request);
 			}
 		}());
