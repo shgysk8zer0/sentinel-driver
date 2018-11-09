@@ -20,3 +20,15 @@ driver-element:hover {
 driver-element.card.dragging {
 	background-color: #bebebe;
 }
+
+.no-pointer-events.card {
+	background: #dedede;
+	color: #ababab;
+	opacity: 0.6;
+}
+
+.warning-message {
+	font-size: 2rem;
+	color: #dd3333;
+	border: 2px dashed currentColor;
+}

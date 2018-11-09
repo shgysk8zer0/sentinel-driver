@@ -63,6 +63,16 @@
 			<driver-list class="block"></driver-list>
 		</aside>
 		<main>
+			<noscript class="card block center warning-message">Please enable JavaScript</noscript>
+			<p is="offline-message" class="offline card block center warning-message" hidden="">
+				<strong>Network currently unavailable.</strong>
+				<br />
+				<svg class="current-color" width="128" height="128">
+					<use xlink:href="#network-offline" />
+				</svg>
+				<br />
+				<ins>Functionality will be limited until you reconnect.</ins>
+			</p>
 			<vehicle-list class="block"></vehicle-list>
 		</main>
 		<footer class="relative z-1" role="contentinfo">

@@ -6,6 +6,7 @@ export default class HTMLVehicleListElement extends HTMLElement {
 		super();
 		const template = document.getElementById('vehicle-list-template').content;
 		this.attachShadow({mode: 'open'}).appendChild(document.importNode(template, true));
+
 		document.addEventListener('login', async () => {
 			try {
 				this.clear();
@@ -30,6 +31,7 @@ export default class HTMLVehicleListElement extends HTMLElement {
 							el.name = vehicle.model;
 							el.uid = vehicle.vehicleid;
 							el.odometer.value = vehicle.mileage;
+							el.odometer.min = vehicle.mileage;
 							if (vehicle.driverid !== '') {
 								el.driver = vehicle.driverid;
 							}
