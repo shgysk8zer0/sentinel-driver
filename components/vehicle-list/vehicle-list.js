@@ -12,7 +12,7 @@ export default class HTMLVehicleListElement extends HTMLElement {
 				this.clear();
 				await customElements.whenDefined('vehicle-element');
 				const HTMLVehicleElement = customElements.get('vehicle-element');
-				const url = new URL(`allvehicles/${sessionStorage.getItem('token')}`, API);
+				const url = new URL(`allout/${sessionStorage.getItem('token')}`, API);
 				const headers = new Headers({Accept: 'application/json'});
 				const resp = await fetch(url, {
 					headers,
