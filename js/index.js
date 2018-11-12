@@ -24,8 +24,8 @@ if (! ('customElements' in window)) {
 	document.getElementById('unsupported-browser').removeAttribute('hidden');
 } else {
 	ready().then(async () => {
-		if (document.documentElement.dataset.hasOwnProperty('serviceWorker') /*&& location.hostname !== 'localhost'*/) {
-			registerServiceWorker(document.documentElement.dataset.serviceWorker);
+		if (navigator.serviceWorker !== undefined && document.documentElement.dataset.hasOwnProperty('serviceWorker')) {
+			registerServiceWorker(document.documentElement.dataset.serviceWorker).catch(console.error);
 		}
 		$(document.documentElement).replaceClass('no-js', 'js');
 		$('link[name="icons"]').import('svg').then(icons => {
