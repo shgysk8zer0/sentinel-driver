@@ -5,8 +5,9 @@ const unsupported = Object.keys(Object.fromEntries(Object.entries({
 	AnimationAPI: Element.prototype.animate instanceof Function,
 	ScriptNoModule: HTMLScriptElement.prototype.hasOwnProperty('noModule'),
 	ShadowDOM: HTMLElement.prototype.attachShadow instanceof Function,
-	HTMLTemplateElement: ! (document.createElement('template') instanceof HTMLUnknownElement),
-	CSSGrid: CSS.supports('display', 'grid'),
+	'<template>': 'content' in document.createElement('template'),
+	'<dialog>': document.createElement('dialog').showModal instanceof Function,
+	CSSGrid: CSS.supports instanceof Function && CSS.supports('display', 'grid'),
 	sessionStorage: window.sessionStorage !== undefined,
 }).filter(test => ! test[1])));
 
