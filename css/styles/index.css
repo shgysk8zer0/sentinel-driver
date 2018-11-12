@@ -29,3 +29,30 @@ dialog {
 	transform: scale(1.05);
 	z-index: 2;
 }
+
+.warning {
+	color: red;
+}
+
+.js #unsupported-browser {
+	display: block;
+	padding: 2em;
+	margin-top: 0.5em;
+	border: 2px dashed red;
+}
+
+.js #unsupported-browser:defined {
+	display: none;
+}
+
+.supported-browsers {
+	justify-content: space-around;
+}
+
+.supported-browsers .browser {
+	transition: transform 300ms ease-in-out;
+}
+
+.supported-browsers .browser:hover {
+	transform: scale(1.15);
+}

@@ -30,6 +30,7 @@
 		<!-- End Twitter Card -->
 		<title itemprop="headline">Sentinel Driver</title>
 		<script type="module" src="/js/index.js" async=""></script>
+		<script src="/js/no-module.js" nomodule="" async=""></script>
 		<link rel="stylesheet" href="/css/styles/index.css" media="all" />
 		<link rel="import" href="/components/login-form/login-form.html" name="LoginForm" async="" />
 		<link rel="import" href="/components/vehicle-element/vehicle-element.html" name="VehicleElement" async="" />
@@ -64,6 +65,27 @@
 		</aside>
 		<main>
 			<noscript class="card block center warning-message">Please enable JavaScript</noscript>
+			<div id="unsupported-browser" is="unsupported-browser" hidden="">
+				<h2 class="warning center">Your browser is not supported.</h2>
+				<div class="center">
+					<strong>This website relies on modern browser features that are not available in your browser.</strong>
+					<br />
+					<em>Please install one of these free modern browsers.</em>
+				</div>
+				<hr />
+				<div class="center supported-browsers flex row wrap">
+					<a href="https://www.google.com/intl/en/chrome/browser/" class="inline-block center card shadow browser" rel="noopener external">
+						<img src="/img/chrome.png" alt="Google Chrome Logo" width="256" height="256" />
+						<br />
+						<span class="browser-label">Google Chrome</span>
+					</a>
+					<a href="https://www.mozilla.org/en-US/firefox/new/" class="inline-block center card shadow browser" rel="noopener external">
+						<img src="/img/firefox.png" alt="Firefox Logo" width="256" height="256" />
+						<br />
+						<span class="browser-label">Mozilla Firefox</span>
+					</a>
+				</div>
+			</div>
 			<p is="offline-message" class="offline card block center warning-message" hidden="">
 				<strong>Network currently unavailable.</strong>
 				<br />

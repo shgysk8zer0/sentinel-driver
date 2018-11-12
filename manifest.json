@@ -1,5 +1,5 @@
 {
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"name": "Sentinel Driver",
 	"short_name": "Sentinel Drv",
 	"description": "Driver interface for SentinelPro",

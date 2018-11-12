@@ -1,5 +1,5 @@
 const config = {
-	version: '1.0.6',
+	version: '1.0.7',
 	caches: [
 		'/',
 		// JS
@@ -41,6 +41,7 @@ const config = {
 		'/components/logout-button.js',
 		'/components/current-year.js',
 		'/components/offline-message.js',
+		'/components/unsupported-browser.js',
 		'/components/vehicle-list/vehicle-list.js',
 		'/components/vehicle-element/vehicle-element.js',
 		'/components/driver-list/driver-list.js',
