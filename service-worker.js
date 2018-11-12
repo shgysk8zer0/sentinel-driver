@@ -12,15 +12,6 @@ const config = {
 		'/js/std-js/esQuery.js',
 		'/js/functions.js',
 		'/js/std-js/asyncDialog.js',
-		// Custom Elements
-		'/components/login-form/login-form.js',
-		'/components/login-button.js',
-		'/components/logout-button.js',
-		'/components/current-year.js',
-		'/components/vehicle-list/vehicle-list.js',
-		'/components/vehicle-element/vehicle-element.js',
-		'/components/driver-list/driver-list.js',
-		'/components/driver-element/driver-element.js',
 		// CSS
 		'/css/styles/index.css',
 		'/css/core-css/viewport.css',
@@ -42,14 +33,24 @@ const config = {
 		// Images
 		'/img/icons.svg',
 		'/img/favicon.svg',
+		// Fonts
+		'/fonts/roboto.woff2',
+		// Custom Elements
+		'/components/login-form/login-form.js',
+		'/components/login-button.js',
+		'/components/logout-button.js',
+		'/components/current-year.js',
+		'/components/offline-message.js',
+		'/components/vehicle-list/vehicle-list.js',
+		'/components/vehicle-element/vehicle-element.js',
+		'/components/driver-list/driver-list.js',
+		'/components/driver-element/driver-element.js',
 		// Templates
 		'/components/login-form/login-form.html',
 		'/components/vehicle-element/vehicle-element.html',
 		'/components/vehicle-list/vehicle-list.html',
 		'/components/driver-list/driver-list.html',
 		'/components/driver-element/driver-element.html',
-		// Fonts
-		'/fonts/roboto.woff2',
 	].map(path => new URL(path, location.origin)),
 	ignored: [
 		'/manifest.json',
