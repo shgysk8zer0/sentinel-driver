@@ -5,4 +5,4 @@
 [![GitHub release](https://img.shields.io/github/release/shgysk8zer0/sentinel-driver.svg)](https://github.com/shgysk8zer0/sentinel-driver/releases)
 [![GitHub license](https://img.shields.io/github/license/shgysk8zer0/sentinel-driver.svg)](https://github.com/shgysk8zer0/sentinel-driver/blob/master/LICENSE)
 - - -
-[![screenshot](https://i.imgur.com/dYhDnrkl.jpg)](https://stupefied-liskov-be143f.netlify.com/)
+[![screenshot](https://i.imgur.com/7XRe85Ml.jpg)](https://stupefied-liskov-be143f.netlify.com/)
