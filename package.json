@@ -1,6 +1,6 @@
 {
   "name": "sentinel-driver",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Driver interface for SentinelPro",
   "private": true,
   "config": {
@@ -34,10 +34,10 @@
   "author": "Chris Zuber <shgysk8zer0@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^5.7.0",
+    "eslint": "^5.9.0",
     "eslint-plugin-async-await": "0.0.0",
     "eslint-plugin-babel": "^5.2.1",
-    "stylelint": "^9.6.0",
+    "stylelint": "^9.8.0",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-standard": "^18.2.0",
     "svgo": "^1.1.1"
