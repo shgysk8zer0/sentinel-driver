@@ -7,7 +7,6 @@ body > aside {
 }
 
 driver-list {
-	height: calc(100vh - var(--nav-height));
 	overflow-y: auto;
 }
 
