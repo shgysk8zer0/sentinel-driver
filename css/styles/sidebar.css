@@ -6,10 +6,6 @@ body > aside {
 	top: var(--nav-height);
 }
 
-driver-list {
-	overflow-y: auto;
-}
-
-driver-list.dragging {
+body > aside.dragging {
 	border: 2px dashed blue;
 }

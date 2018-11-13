@@ -25,7 +25,7 @@ export default class HTMLVehicleListElement extends HTMLElement {
 						throw new Error(`${json.message} [${json.error}]`);
 					} else {
 						await customElements.whenDefined('driver-list');
-						await document.querySelector('driver-list').load();
+						await document.querySelector('[is="driver-list"]').load();
 						const vehicles = json.map(vehicle => {
 							const el = new HTMLVehicleElement();
 							el.model = vehicle.model;
@@ -112,5 +112,5 @@ export default class HTMLVehicleListElement extends HTMLElement {
 
 $('link[name="VehicleList"]').import('template').then(frag => {
 	document.body.append(frag);
-	customElements.define('vehicle-list', HTMLVehicleListElement);
+	customElements.define('vehicle-list', HTMLVehicleListElement, {extends: 'section'});
 });

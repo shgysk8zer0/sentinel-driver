@@ -286,7 +286,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	set driver(driver) {
-		const drivers = document.querySelector('driver-list');
+		const drivers = document.querySelector('[is="driver-list"]');
 		const driverEl = drivers.find(driver);
 		const currentDriver = this.driver;
 
@@ -317,7 +317,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get list() {
-		return document.querySelector('vehicle-list');
+		return document.querySelector('[is="vehicle-list"]');
 	}
 }
 
