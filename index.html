@@ -60,9 +60,7 @@
 				</svg>
 			</button>
 		</nav>
-		<aside role="complementary" itemtype="http://schema.org/WPSideBar" itemscope="">
-			<driver-list class="block"></driver-list>
-		</aside>
+		<aside is="driver-list" role="complementary" itemtype="http://schema.org/WPSideBar" itemscope=""></aside>
 		<main>
 			<noscript class="card block center warning-message">Please enable JavaScript</noscript>
 			<div id="unsupported-browser" is="unsupported-browser" hidden="">
@@ -95,7 +93,7 @@
 				<br />
 				<ins>Functionality will be limited until you reconnect.</ins>
 			</p>
-			<vehicle-list class="block"></vehicle-list>
+			<section is="vehicle-list" class="block"></section>
 		</main>
 		<footer class="relative z-1" role="contentinfo">
 			<div id="org-info" itemprop="copyrightHolder" itemtype="http://schema.org/Organization" itemscope="">

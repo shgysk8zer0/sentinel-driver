@@ -132,7 +132,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 
 		$('[data-action="clear-driver"]', this.shadowRoot).click(async () => {
 			const driver = this.driver;
-			if (driver instanceof HTMLElement && await confirm(`Are you sure you want to remove ${this.driver.name} from ${this.name}?`)) {
+			if (driver instanceof HTMLElement && await confirm(`Are you sure you want to remove ${this.driver.name} from ${this.model}?`)) {
 				this.driver = null;
 			}
 		});
@@ -166,8 +166,15 @@ export default class HTMLVehicleElement extends HTMLElement {
 	toJSON() {
 		return {
 			uid: this.uid,
-			name: this.name,
+			vin: this.vin,
+			type: this.type,
+			make: this.make,
+			model: this.model,
+			year: this.year,
+			license: this.license,
+			licenseState: this.licenseState,
 			odometer: this.odometer.value,
+			owner: this.owner,
 		};
 	}
 
@@ -189,17 +196,88 @@ export default class HTMLVehicleElement extends HTMLElement {
 		this.setAttribute('uid', id);
 	}
 
-	get name() {
-		const nodes = this.shadowRoot.querySelector('slot[name="name"]').assignedNodes();
+	get model() {
+		const nodes = this.shadowRoot.querySelector('slot[name="model"]').assignedNodes();
 		return nodes.length === 0 ? undefined : nodes[0].textContent;
 	}
 
-	set name(name) {
+	set model(model) {
 		const el = document.createElement('span');
-		el.textContent = name;
-		el.slot = 'name';
-		this.title = name;
+		el.textContent = model;
+		el.slot = 'model';
 		this.append(el);
+	}
+
+	get make() {
+		const nodes = this.shadowRoot.querySelector('slot[name="make"]').assignedNodes();
+		return nodes.length === 0 ? undefined : nodes[0].textContent;
+	}
+
+	set make(make) {
+		const el = document.createElement('span');
+		el.textContent = make;
+		el.slot = 'make';
+		this.append(el);
+	}
+
+	get type() {
+		return this.getAttribute('type');
+	}
+
+	set type(type) {
+		this.setAttribute('type', type);
+	}
+
+	get year() {
+		const nodes = this.shadowRoot.querySelector('slot[name="year"]').assignedNodes();
+		return nodes.length === 0 ? undefined : parseInt(nodes[0].textContent);
+	}
+
+	set year(year) {
+		const el = document.createElement('span');
+		el.textContent = year;
+		el.slot = 'year';
+		this.append(el);
+	}
+
+	get license() {
+		const nodes = this.shadowRoot.querySelector('slot[name="license"]').assignedNodes();
+		return nodes.length === 0 ? undefined : nodes[0].textContent;
+	}
+
+	set license(license) {
+		const el = document.createElement('span');
+		el.textContent = license;
+		el.slot = 'license';
+		this.append(el);
+	}
+
+	get licenseState() {
+		const nodes = this.shadowRoot.querySelector('slot[name="licenseState"]').assignedNodes();
+		return nodes.length === 0 ? undefined : nodes[0].textContent;
+	}
+
+	set licenseState(state) {
+		const el = document.createElement('span');
+		el.textContent = state;
+		el.slot = 'state';
+		this.append(el);
+	}
+
+	get vin() {
+		return this.getAttribute('vin');
+	}
+
+	set vin(vin) {
+		this.setAttribute('vin', vin);
+	}
+
+	get owner() {
+		return this.getAttribute('owner');
+	}
+
+	set owner(owner) {
+		this.setAttribute('owner', owner);
 	}
 
 	get driver() {
@@ -208,7 +286,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	set driver(driver) {
-		const drivers = document.querySelector('driver-list');
+		const drivers = document.querySelector('[is="driver-list"]');
 		const driverEl = drivers.find(driver);
 		const currentDriver = this.driver;
 
@@ -239,7 +317,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get list() {
-		return document.querySelector('vehicle-list');
+		return document.querySelector('[is="vehicle-list"]');
 	}
 }
 

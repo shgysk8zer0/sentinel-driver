@@ -72,6 +72,10 @@ export default class HTMLDriverListElement extends HTMLElement {
 		document.addEventListener('logout', () => this.clear());
 	}
 
+	toJSON() {
+		return this.drivers;
+	}
+
 	get drivers() {
 		return [...this.shadowRoot.querySelector('slot[name="driver"]').assignedNodes()];
 	}
@@ -98,5 +102,5 @@ export default class HTMLDriverListElement extends HTMLElement {
 
 $('link[name="DriverList"]').import('template').then(frag => {
 	document.body.append(frag);
-	customElements.define('driver-list', HTMLDriverListElement);
+	customElements.define('driver-list', HTMLDriverListElement, {extends: 'aside'});
 });

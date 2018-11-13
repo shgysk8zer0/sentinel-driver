@@ -4,12 +4,9 @@ body > aside {
 	border-right: 1px solid var(--default-color);
 	position: sticky;
 	top: var(--nav-height);
+	max-height: calc(100% - var(--nav-height));
 }
 
-driver-list {
-	overflow-y: auto;
-}
-
-driver-list.dragging {
+body > aside.dragging {
 	border: 2px dashed blue;
 }

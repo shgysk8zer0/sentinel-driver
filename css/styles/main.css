@@ -8,7 +8,8 @@ vehicle-element.dragging, driver-list.dragging {
 }
 
 driver-element {
-	transition: background-color 400ms ease-in-out, transform 300ms ease-in-out;
+	transition: opacity 200ms ease-in-out, transform 300ms ease-in-out;
+	display: block;
 	margin-bottom: 0.2rem;
 	cursor: grab;
 }
@@ -18,7 +19,7 @@ driver-element:hover {
 }
 
 driver-element.card.dragging {
-	background-color: #bebebe;
+	opacity: 0.4;
 }
 
 .no-pointer-events.card {

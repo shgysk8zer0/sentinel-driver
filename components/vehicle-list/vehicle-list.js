@@ -25,11 +25,17 @@ export default class HTMLVehicleListElement extends HTMLElement {
 						throw new Error(`${json.message} [${json.error}]`);
 					} else {
 						await customElements.whenDefined('driver-list');
-						await document.querySelector('driver-list').load();
+						await document.querySelector('[is="driver-list"]').load();
 						const vehicles = json.map(vehicle => {
 							const el = new HTMLVehicleElement();
-							el.name = vehicle.model;
+							el.model = vehicle.model;
+							el.make = vehicle.make;
+							el.year = vehicle.modelyear;
 							el.uid = vehicle.vehicleid;
+							el.license = vehicle.licensenumber;
+							el.licenseState = vehicle.licensestate;
+							el.owner = vehicle.ownersname;
+							el.vin = vehicle.vin;
 							el.odometer.value = vehicle.mileage;
 							el.odometer.min = vehicle.mileage;
 							if (vehicle.driverid !== '') {
@@ -50,6 +56,10 @@ export default class HTMLVehicleListElement extends HTMLElement {
 			}
 		});
 		document.addEventListener('logout', () => this.clear());
+	}
+
+	toJSON() {
+		return this.vehicles;
 	}
 
 	set vehicles(vehicles) {
@@ -102,5 +112,5 @@ export default class HTMLVehicleListElement extends HTMLElement {
 
 $('link[name="VehicleList"]').import('template').then(frag => {
 	document.body.append(frag);
-	customElements.define('vehicle-list', HTMLVehicleListElement);
+	customElements.define('vehicle-list', HTMLVehicleListElement, {extends: 'section'});
 });
