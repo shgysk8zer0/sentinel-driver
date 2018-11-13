@@ -1,7 +1,17 @@
 <template id="vehicle-element-template">
 	<style>
+		.block {
+			display: block;
+		}
+
 		.inline-block {
 			display: inline-block;
+		}
+
+		.vehicle-name {
+			font-size: 1.2rem;
+			margin: 0.2em;
+			padding: 0;
 		}
 
 		.vehicle-img {
@@ -11,6 +21,7 @@
 			margin: 0.2rem;
 			color: #656565;
 			transition: color 300ms ease-in-out;
+			max-width: 50%;
 		}
 
 		.vehicle-img:hover {
@@ -86,12 +97,21 @@
 			<slot name="year"></slot>
 			<slot name="make"></slot>
 			<slot name="model">Unnamed Vehicle</slot>
-			<div class="license">
-				<slot name="license"></slot>
-				<slot name="licenseState"></slot>
-			</div>
 		</h3>
-		<form>
+		<div class="license center">
+			<slot name="license"></slot>
+			<slot name="licenseState"></slot>
+		</div>
+		<div>
+			<slot name="driver"></slot>
+			<!-- <button type="button" data-action="clear-driver" hidden="">X</button> -->
+		</div>
+		<form class="center">
+			<slot name="image" class="vehicle-img inline-block">
+				<svg viewBox="0 0 27.767 25.113" xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+					<path d="M13.896.263C13.78.26 13.66.26 8.01.268c-1.72 0-2.633 1.014-3.054 2.2L2.72 8.695C1.833 8.818.263 9.942.263 12.068v7.923H2.44v2.53c0 3.116 4.089 3.08 4.089 0v-2.53h14.709v2.53c0 3.08 4.088 3.116 4.088 0v-2.53h2.176v-7.923c0-2.126-1.571-3.25-2.458-3.373l-2.237-6.227c-.421-1.186-1.334-2.2-3.054-2.2-5.631 0-5.741-.003-5.856-.005zM7.984 2.537h11.794c.737.007 1.053.505 1.264 1.193l1.685 4.819H5.036L6.72 3.73c.21-.688.527-1.186 1.264-1.193zm-3.436 8.41c1.043 0 1.89.94 1.89 2.1 0 1.16-.847 2.1-1.89 2.1s-1.888-.94-1.888-2.1c0-1.16.845-2.1 1.888-2.1zm18.667 0c1.043 0 1.888.94 1.888 2.1 0 1.16-.845 2.1-1.888 2.1s-1.89-.94-1.89-2.1c0-1.16.847-2.1 1.89-2.1z"/>
+				</svg>
+			</slot>
 			<label class="block" title="Odometer">
 				<svg class="icon dashboard-icon current-color" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
 					<path fill-rule="evenodd" d="M9 5H8V4h1v1zm4 3h-1v1h1V8zM6 5H5v1h1V5zM5 8H4v1h1V8zm11-5.5l-.5-.5L9 7c-.06-.02-1 0-1 0-.55 0-1 .45-1 1v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-.92l6-5.58zm-1.59 4.09c.19.61.3 1.25.3 1.91 0 3.42-2.78 6.2-6.2 6.2-3.42 0-6.21-2.78-6.21-6.2 0-3.42 2.78-6.2 6.2-6.2 1.2 0 2.31.34 3.27.94l.94-.94A7.459 7.459 0 0 0 8.51 1C4.36 1 1 4.36 1 8.5 1 12.64 4.36 16 8.5 16c4.14 0 7.5-3.36 7.5-7.5 0-1.03-.2-2.02-.59-2.91l-1 1z"/>
@@ -100,14 +120,6 @@
 				<input type="number" name="odometer" placeholder="######" min="0" />
 			</label>
 		</form>
-		<div class="vehicle-img center">
-			<slot name="image" class="inline-bock">
-				<svg viewBox="0 0 27.767 25.113" xmlns="http://www.w3.org/2000/svg">
-					<path d="M13.896.263C13.78.26 13.66.26 8.01.268c-1.72 0-2.633 1.014-3.054 2.2L2.72 8.695C1.833 8.818.263 9.942.263 12.068v7.923H2.44v2.53c0 3.116 4.089 3.08 4.089 0v-2.53h14.709v2.53c0 3.08 4.088 3.116 4.088 0v-2.53h2.176v-7.923c0-2.126-1.571-3.25-2.458-3.373l-2.237-6.227c-.421-1.186-1.334-2.2-3.054-2.2-5.631 0-5.741-.003-5.856-.005zM7.984 2.537h11.794c.737.007 1.053.505 1.264 1.193l1.685 4.819H5.036L6.72 3.73c.21-.688.527-1.186 1.264-1.193zm-3.436 8.41c1.043 0 1.89.94 1.89 2.1 0 1.16-.847 2.1-1.89 2.1s-1.888-.94-1.888-2.1c0-1.16.845-2.1 1.888-2.1zm18.667 0c1.043 0 1.888.94 1.888 2.1 0 1.16-.845 2.1-1.888 2.1s-1.89-.94-1.89-2.1c0-1.16.847-2.1 1.89-2.1z"/>
-				</svg>
-			</slot>
-		</div>
-		<slot name="driver">No Driver</slot>
-		<button type="button" data-action="clear-driver" hidden="">X</button>
+		<br />
 	</div>
 </template>
