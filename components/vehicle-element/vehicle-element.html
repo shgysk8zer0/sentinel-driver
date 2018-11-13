@@ -83,7 +83,13 @@
 	</style>
 	<div class="vehicle" draggable="true">
 		<h3 class="vehicle-name center">
-			<slot name="name" class="inline-block">Unnamed Vehicle</slot>
+			<slot name="year"></slot>
+			<slot name="make"></slot>
+			<slot name="model">Unnamed Vehicle</slot>
+			<div class="license">
+				<slot name="license"></slot>
+				<slot name="licenseState"></slot>
+			</div>
 		</h3>
 		<form>
 			<label class="block" title="Odometer">

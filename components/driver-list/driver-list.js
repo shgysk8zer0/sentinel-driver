@@ -72,6 +72,10 @@ export default class HTMLDriverListElement extends HTMLElement {
 		document.addEventListener('logout', () => this.clear());
 	}
 
+	toJSON() {
+		return this.drivers;
+	}
+
 	get drivers() {
 		return [...this.shadowRoot.querySelector('slot[name="driver"]').assignedNodes()];
 	}
