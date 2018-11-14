@@ -3,7 +3,7 @@
 	"name": "Sentinel Driver",
 	"short_name": "Sentinel Drv",
 	"description": "Driver interface for SentinelPro",
-	"start_url": "./",
+	"start_url": ".",
 	"lang": "en",
 	"display": "standalone",
 	"theme_color": "#2d89ef",
