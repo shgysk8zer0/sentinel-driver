@@ -10,7 +10,7 @@ export default class HTMLDriverListElement extends HTMLElement {
 
 		this.addEventListener('drop', event => {
 			event.preventDefault();
-			const vehicleList = document.querySelector('vehicle-list');
+			const vehicleList = document.querySelector('[is="vehicle-list"]');
 			const data = JSON.parse(event.dataTransfer.getData('application/json'));
 			this.classList.remove('dragging');
 
