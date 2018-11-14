@@ -1,6 +1,6 @@
 {
   "name": "sentinel-driver",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Driver interface for SentinelPro",
   "private": true,
   "config": {

@@ -15,15 +15,13 @@ export default class HTMLVehicleElement extends HTMLElement {
 		window.addEventListener('online', () => this.classList.remove('no-pointer-events'));
 		$('form', this.shadowRoot).submit(event => event.preventDefault());
 
-		this.odometer.addEventListener('change', event => {
-			const mileage = event.target.valueAsNumber;
-			const min = parseInt(event.target.min);
-
-			if (! Number.isNaN(mileage) && mileage > min) {
+		this.odometer.addEventListener('change',() => {
+			this.errorMessage.hidden = this.odometer.validity.valid;
+			if (this.odometer.validity.valid) {
 				this.dispatchEvent(new CustomEvent('odometerchange', {
 					detail: {
 						vehicleid: this.uid,
-						mileage: event.target.valueAsNumber,
+						mileage: this.odometer.valueAsNumber,
 					}
 				}));
 			}
@@ -130,6 +128,8 @@ export default class HTMLVehicleElement extends HTMLElement {
 			}
 		});
 
+		this.getSlot('driver').addEventListener('dblclick', () => this.driver = null);
+
 		$('[data-action="clear-driver"]', this.shadowRoot).click(async () => {
 			const driver = this.driver;
 			if (driver instanceof HTMLElement && await confirm(`Are you sure you want to remove ${this.driver.name} from ${this.model}?`)) {
@@ -178,6 +178,34 @@ export default class HTMLVehicleElement extends HTMLElement {
 		};
 	}
 
+	getSlot(name) {
+		return this.slots.find(slot => slot.name === name);
+	}
+
+	getSlotNodes(name) {
+		const slot = this.getSlot(name);
+		return slot instanceof HTMLElement ? slot.assignedNodes() : [];
+	}
+
+	clearSlot(name) {
+		this.getSlotNodes(name).forEach(el => el.remove());
+	}
+
+	get slots() {
+		return Array.from(this.shadowRoot.querySelectorAll('slot[name]'));
+	}
+
+	get errorMessage() {
+		return this.getSlot('error-message');
+	}
+
+	set errorMessage(message) {
+		const el = document.createElement('em');
+		el.slot = 'error-message';
+		el.textContent = message;
+		this.append(el);
+	}
+
 	get connected() {
 		return new Promise(resolve => {
 			if (this.isConnected) {
@@ -197,7 +225,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get model() {
-		const nodes = this.shadowRoot.querySelector('slot[name="model"]').assignedNodes();
+		const nodes = this.getSlotNodes('model');
 		return nodes.length === 0 ? undefined : nodes[0].textContent;
 	}
 
@@ -209,7 +237,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get make() {
-		const nodes = this.shadowRoot.querySelector('slot[name="make"]').assignedNodes();
+		const nodes = this.getSlotNodes('make');
 		return nodes.length === 0 ? undefined : nodes[0].textContent;
 	}
 
@@ -229,7 +257,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get year() {
-		const nodes = this.shadowRoot.querySelector('slot[name="year"]').assignedNodes();
+		const nodes = this.getSlotNodes('year');
 		return nodes.length === 0 ? undefined : parseInt(nodes[0].textContent);
 	}
 
@@ -241,7 +269,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get license() {
-		const nodes = this.shadowRoot.querySelector('slot[name="license"]').assignedNodes();
+		const nodes = this.getSlotNodes('license');
 		return nodes.length === 0 ? undefined : nodes[0].textContent;
 	}
 
@@ -253,7 +281,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get licenseState() {
-		const nodes = this.shadowRoot.querySelector('slot[name="licenseState"]').assignedNodes();
+		const nodes = this.getSlotNodes('licenseState');
 		return nodes.length === 0 ? undefined : nodes[0].textContent;
 	}
 
@@ -281,7 +309,7 @@ export default class HTMLVehicleElement extends HTMLElement {
 	}
 
 	get driver() {
-		const drivers = this.shadowRoot.querySelector('slot[name="driver"]').assignedNodes();
+		const drivers = this.getSlotNodes('driver');
 		return drivers.length !== 0 ? drivers[0]: undefined;
 	}
 

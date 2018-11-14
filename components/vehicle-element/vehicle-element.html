@@ -1,11 +1,17 @@
 <template id="vehicle-element-template">
 	<style>
-		.block {
+		.block:not([hidden]) {
 			display: block;
 		}
 
-		.inline-block {
+		.inline-block:not([hidden]) {
 			display: inline-block;
+		}
+
+		.error {
+			color: #C81C1C;
+			font-size: 0.7em;
+			padding: 0.6em;
 		}
 
 		.vehicle-name {
@@ -49,20 +55,19 @@
 			fill: currentColor;
 		}
 
-		.block {
-			display: block;
-		}
-
-		.inline-block {
-			display: inline-block;
-		}
-
 		input {
-			padding: 0.2em;
-			background: inherit;
+			padding: 0.4em;
+			background: transparent;
+			border-radius: 4px;
 			border-width: 0 0 1px 0;
 			border-style: solid;
 			border-color: #b3b3b3;
+		}
+
+		input:not(:focus):invalid {
+			border-color: #E80C0C;
+			box-shadow: 0 0 1em rgba(91%, 5%, 5%, 0.85);
+			animation: invalid 600ms infinite ease-in-out alternate;
 		}
 
 		[name="odometer"] {
@@ -91,6 +96,17 @@
 			color: var(--button-activer-color);
 			border: var(--button-active-border);
 		}
+
+		@keyframes invalid {
+			from {
+				border-color: #b3b3b3;
+				box-shadow: 0 0 1em transparent;
+			}
+			to {
+				border-color: #E80C0C;
+				box-shadow: 0 0 1em rgba(91%, 5%, 5%, 0.85);
+			}
+		}
 	</style>
 	<div class="vehicle" draggable="true">
 		<h3 class="vehicle-name center">
@@ -118,6 +134,9 @@
 				</svg>
 				<span>&nbsp;</span>
 				<input type="number" name="odometer" placeholder="######" min="0" />
+				<slot class="block error" name="error-message" hidden="">
+					<em>Enter a number greater than the previous value.</em>
+				</slot>
 			</label>
 		</form>
 		<br />
