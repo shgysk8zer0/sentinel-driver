@@ -1,23 +1,23 @@
 {
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"name": "Sentinel Driver",
 	"short_name": "Sentinel Drv",
 	"description": "Driver interface for SentinelPro",
-	"start_url": "/",
+	"start_url": ".",
 	"lang": "en",
 	"display": "standalone",
 	"theme_color": "#2d89ef",
 	"background_color": "#FEFEFE",
 	"icons": [{
-    "src": "/img/favicon.svg",
+    "src": "./img/favicon.svg",
     "type": "image/svg+xml",
     "sizes": "any"
   }, {
-    "src": "/img/icon-512.png",
+    "src": "./img/icon-512.png",
     "type": "image/png",
     "sizes": "512x512"
   }, {
-    "src": "/img/icon-192.png",
+    "src": "./img/icon-192.png",
     "type": "image/png",
     "sizes": "192x192"
   }],
