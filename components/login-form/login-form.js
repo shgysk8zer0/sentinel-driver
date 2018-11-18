@@ -29,6 +29,8 @@ export default class LoginForm extends HTMLElement {
 				});
 			}
 		});
+
+		$('.dialog-container', this.shadowRoot).pickClass('no-dialog', 'dialog', document.createElement('dialog') instanceof HTMLUnknownElement);
 	}
 
 	async loginWithCreds() {

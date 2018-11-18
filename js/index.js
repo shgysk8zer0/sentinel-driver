@@ -20,6 +20,8 @@ async function online() {
 	}
 }
 
+document.documentElement.classList.toggle('no-dialog', document.createElement('dialog') instanceof HTMLUnknownElement);
+
 if (! ('customElements' in window)) {
 	document.getElementById('unsupported-browser').removeAttribute('hidden');
 } else {
