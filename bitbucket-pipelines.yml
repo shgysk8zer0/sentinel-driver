@@ -11,6 +11,8 @@ pipelines:
     - step:
         name: Test
         deployment: test
+        artifacts:
+          - node_modules/
         caches:
           - node
         script:
@@ -26,6 +28,7 @@ pipelines:
           caches:
             - node
           artifacts:
+            - node_modules/
             - img/icons.svg
             - js/*.min
             - js/*.map
