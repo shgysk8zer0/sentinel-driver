@@ -1,4 +1,4 @@
-import {confirm} from '../../js/std-js/asyncDialog.js';
+import {confirm} from '../js/std-js/asyncDialog.js';
 
 class HTMLLogoutButtonElement extends HTMLButtonElement {
 	constructor() {
