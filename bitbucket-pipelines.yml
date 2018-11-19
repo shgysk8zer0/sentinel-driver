@@ -52,4 +52,4 @@ pipelines:
           caches:
             - node
           script:
-            - npm run rsync
+            - rsync --exclude-from ./.rsyncignore -r --progress --delete -s ./ fleetui@sentineldrive.com:/var/www/vhosts/sentineldrive.com/httpdocs/checkout/
