@@ -52,4 +52,4 @@ pipelines:
           caches:
             - node
           script:
-            - rsync --exclude-from $BITBUCKET_CLONE_DIR/$DEPLOY_IGNORE -r --progress --delete -s $BITBUCKET_CLONE_DIR/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH"
+            - rsync --exclude-from $BITBUCKET_CLONE_DIR/$DEPLOY_IGNORE -r --progress --delete -s $BITBUCKET_CLONE_DIR/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
