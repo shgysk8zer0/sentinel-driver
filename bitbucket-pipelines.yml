@@ -52,6 +52,4 @@ pipelines:
           caches:
             - node
           script:
-            - apt-get update && apt-get install -y rsync
-            - ssh-keyscan sentineldrive.com >> ~/.ssh/known_hosts
             - npm run rsync
