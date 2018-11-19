@@ -1,6 +1,6 @@
 {
   "name": "sentinel-driver",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Driver interface for SentinelPro",
   "private": true,
   "config": {
@@ -14,6 +14,12 @@
       "css": "css/styles/",
       "js": "js/",
       "img": "img/"
+    },
+    "remote": {
+      "user": "fleetui",
+      "domain": "sentineldrive.com",
+      "path": "/var/www/vhosts/sentineldrive.com/httpdocs/sentinel-driver/",
+      "ignorefile": "./.rsyncignore"
     }
   },
   "scripts": {
@@ -24,7 +30,9 @@
     "build": "npm run build:icons",
     "build:icons": "svg-sprite-generate -c icons.csv -o ${npm_package_config_dir_img}icons.svg",
     "lint:css": "stylelint ${npm_package_config_dir_css}",
-    "lint:js": "eslint ${npm_package_config_dir_js}"
+    "lint:js": "eslint ${npm_package_config_dir_js}",
+    "rsync": "rsync --exclude-from ${npm_package_config_remote_ignorefile} -r --progress --delete -s ./ ${npm_package_config_remote_user}@${npm_package_config_remote_domain}:${npm_package_config_remote_path}",
+    "deploy": "npm test && npm run build && npm run rsync"
   },
   "keywords": [
     "vrmt",
