@@ -18,7 +18,7 @@
     "remote": {
       "user": "fleetui",
       "domain": "sentineldrive.com",
-      "path": "/var/www/vhosts/sentineldrive.com/httpdocs/sentinel-driver/",
+      "path": "/var/www/vhosts/sentineldrive.com/httpdocs/checkout/",
       "ignorefile": "./.rsyncignore"
     }
   },
