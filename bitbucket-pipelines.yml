@@ -23,12 +23,21 @@ pipelines:
   branches:
     master:
       - step:
+          name: Test
+          deployment: test
+          caches:
+            - node
+          script:
+            - npm run preinstall
+            - npm install
+            - npm run postinstall
+            - npm test
+      - step:
           name: Install
           deployment: staging
           caches:
             - node
           artifacts:
-            - node_modules/
             - img/icons.svg
             - js/*.min
             - js/*.map
