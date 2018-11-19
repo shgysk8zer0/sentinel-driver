@@ -52,4 +52,5 @@ pipelines:
           caches:
             - node
           script:
+            - sudo apt-get install -y rsync
             - rsync --exclude-from $BITBUCKET_CLONE_DIR/$DEPLOY_IGNORE -r --progress --delete -s $BITBUCKET_CLONE_DIR/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
