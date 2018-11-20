@@ -11,15 +11,6 @@ pipelines:
     - step:
         name: Test
         deployment: test
-        artifacts:
-          - css/animate.css/**
-          - css/core-css/**
-          - css/normalize/**
-          - fonts/**
-          - js/**
-          - img/adwaita-icons/**
-          - img/logos/**
-          - img/octicons/**
         caches:
           - node
         script:
@@ -35,14 +26,6 @@ pipelines:
           caches:
             - node
           artifacts:
-            - css/animate.css/**
-            - css/core-css/**
-            - css/normalize/**
-            - fonts/**
-            - js/**
-            - img/adwaita-icons/**
-            - img/logos/**
-            - img/octicons/**
             - img/icons.svg
             - js/*.min
             - js/*.map
