@@ -12,7 +12,14 @@ pipelines:
         name: Test
         deployment: test
         artifacts:
-          - node_modules/
+          - css/animate.css/**
+          - css/core-css/**
+          - css/normalize/**
+          - fonts/**
+          - js/**
+          - img/adwaita-icons/**
+          - img/logos/**
+          - img/octicons/**
         caches:
           - node
         script:
@@ -23,21 +30,19 @@ pipelines:
   branches:
     master:
       - step:
-          name: Test
-          deployment: test
-          caches:
-            - node
-          script:
-            - npm run preinstall
-            - npm install
-            - npm run postinstall
-            - npm test
-      - step:
           name: Install
           deployment: staging
           caches:
             - node
           artifacts:
+            - css/animate.css/**
+            - css/core-css/**
+            - css/normalize/**
+            - fonts/**
+            - js/**
+            - img/adwaita-icons/**
+            - img/logos/**
+            - img/octicons/**
             - img/icons.svg
             - js/*.min
             - js/*.map
@@ -52,5 +57,6 @@ pipelines:
           caches:
             - node
           script:
+            - npm run preinstall
             - apt-get update && apt-get install -y rsync
             - rsync --exclude-from $BITBUCKET_CLONE_DIR/$DEPLOY_IGNORE -r --progress --delete -s $BITBUCKET_CLONE_DIR/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
