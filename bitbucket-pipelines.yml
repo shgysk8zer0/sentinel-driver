@@ -11,21 +11,11 @@ pipelines:
     - step:
         name: Test
         deployment: test
-        artifacts:
-          - css/animate.css/**
-          - css/core-css/**
-          - css/normalize/**
-          - fonts/**
-          - js/**
-          - img/adwaita-icons/**
-          - img/logos/**
-          - img/octicons/**
         caches:
           - node
         script:
           - npm run preinstall
           - npm install
-          - npm run postinstall
           - npm test
   branches:
     master:
@@ -35,14 +25,6 @@ pipelines:
           caches:
             - node
           artifacts:
-            - css/animate.css/**
-            - css/core-css/**
-            - css/normalize/**
-            - fonts/**
-            - js/**
-            - img/adwaita-icons/**
-            - img/logos/**
-            - img/octicons/**
             - img/icons.svg
             - js/*.min
             - js/*.map
@@ -50,7 +32,7 @@ pipelines:
             - css/*.map
           script:
             - npm run preinstall
-            - npm run build
+            - npm run postinstall
       - step:
           name: Deploy
           deployment: production
