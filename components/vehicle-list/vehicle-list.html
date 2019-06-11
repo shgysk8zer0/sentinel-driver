@@ -2,9 +2,9 @@
 	<style>
 		.grid-list {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, 350px);
+			grid-template-columns: repeat(auto-fill, minmax(350px, auto));
 			grid-template-rows: repeat(auto-fill, minmax(250px, auto));
-			grid-gap: 0.3rem;
+			grid-gap: 0.5rem;
 		}
 	</style>
 	<slot class="grid-list" name="vehicles"></slot>
