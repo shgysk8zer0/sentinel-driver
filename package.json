@@ -6,9 +6,8 @@
   "config": {
     "serve": {
       "domain": "localhost",
-      "port": {
-        "dev": 8001
-      }
+      "path": ".",
+      "port": 8001
     },
     "dir": {
       "css": "css/styles/",
@@ -25,7 +24,7 @@
   "scripts": {
     "preinstall": "git submodule update --init --recursive",
     "postinstall": "npm run build",
-    "start": "python -m SimpleHTTPServer ${npm_package_config_serve_port_dev}",
+    "start": "http-server ${npm_package_config_serve_path} -p ${npm_package_config_serve_port} -a ${npm_package_config_serve_domain} -o",
     "test": "npm run lint:js && npm run lint:css",
     "build": "npm run build:icons",
     "build:icons": "svg-sprite-generate -c icons.csv -o ${npm_package_config_dir_img}icons.svg",
@@ -45,6 +44,7 @@
     "eslint": "^5.9.0",
     "eslint-plugin-async-await": "0.0.0",
     "eslint-plugin-babel": "^5.2.1",
+    "http-server": "^0.11.1",
     "stylelint": "^9.8.0",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-standard": "^18.2.0",
